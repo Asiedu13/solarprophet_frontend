@@ -1,0 +1,6 @@
+wind_speed,temperature,humidity,solar_irradiance,power_output
+5.2,30,60,800,120
+6.1,32,55,850,140
+4.8,28,70,600,90
+7.0,33,50,900,160
+5.8,31,58,780,130
