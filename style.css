@@ -1,0 +1,596 @@
+/* ============================================================
+   SOLARPROPHET — style.css
+   
+   Design tokens live in :root as CSS custom properties.
+   This makes it easy to theme or tweak the palette in one place.
+   ============================================================ */
+
+/* ── Google Fonts import ──────────────────────────────────────
+   We use two fonts to match the screenshot:
+   · "Playfair Display" → serif display font for headlines & brand
+   · "DM Mono"          → monospace for labels, badges, eyebrow text
+   ─────────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=DM+Mono:ital,wght@0,400;0,500;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap');
+
+/* ── Design Tokens ────────────────────────────────────────── */
+:root {
+  /* Palette — warm cream background, dark brown text, orange accent */
+  --cream:        #F7EEE2;        /* page background */
+  --cream-light:  #FBF5ED;        /* card / lighter surface */
+  --cream-mid:    #EFE0CB;        /* subtle dividers */
+  --brown-dark:   #1C120A;        /* primary text */
+  --brown-mid:    #5A3E28;        /* secondary text */
+  --brown-light:  #9C7B5E;        /* muted / caption text */
+  --orange:       #C45E20;        /* primary accent (orange) */
+  --orange-light: #D96B2A;        /* slightly lighter orange for chart */
+  --orange-pale:  #F0D4B8;        /* very light orange tint */
+  --badge-bg:     #F2D8C2;        /* "DAY-AHEAD" badge background */
+  --white:        #FFFFFF;
+
+  /* Typography scale */
+  --font-serif:   'Playfair Display', Georgia, serif;
+  --font-mono:    'DM Mono', 'Courier New', monospace;
+  --font-sans:    'DM Sans', system-ui, sans-serif;
+
+  /* Spacing */
+  --nav-h:        68px;
+
+  /* Transitions */
+  --ease:         cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* ── Reset & Base ─────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  /* Warm cream background with a subtle radial glow in top-right
+     to create the warm golden light effect seen in the screenshot */
+  background-color: var(--cream);
+  background-image:
+    radial-gradient(ellipse 60% 55% at 78% 10%, rgba(220,160,80,0.22) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 35% at 90% 0%,  rgba(240,190,100,0.15) 0%, transparent 60%);
+  color: var(--brown-dark);
+  font-family: var(--font-sans);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul { list-style: none; }
+
+/* 
+   Styling the navigation bars
+    */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--nav-h);
+  padding: 0 2.5rem;
+  /* Transparent nav sits on top of the cream bg */
+}
+
+/* Logo group: sun icon + brand name */
+ nav .logo {
+  display: flex;
+  align-items: center;  /* keeps both on the same vertical line */
+  gap:  10px; 
+  
+}
+
+.nav__sun {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
+.nav__brand {
+  letter-spacing: -0.01em;
+  font-size: 20px;
+}
+
+/* Horizontal nav link list */
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.nav__links a {
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: var(--brown-mid);
+  transition: color 0.2s var(--ease);
+}
+
+.nav__links a:hover {
+  color: var(--brown-dark);
+}
+
+
+
+/* Right side: "Sign in" text link + CTA button */
+.nav__actions {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.nav__signin {
+  font-size: 0.875rem;
+  color: var(--brown-mid);
+  transition: color 0.2s var(--ease);
+}
+
+.nav__signin:hover {
+  color: var(--brown-dark);
+}
+
+/* ── Shared Button Base ───────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: 999px;  /* pill shape */
+  cursor: pointer;
+  transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease), background 0.2s var(--ease);
+}
+
+/* Nav-level "Get a forecast" pill — burnt orange */
+.btn--primary {
+  background: var(--orange);
+  color: var(--white);
+  padding: 0.55rem 1.25rem;
+}
+
+.btn--primary:hover {
+  background: #A8501A;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(196,94,32,0.3);
+}
+
+/* Hero-level "Get a forecast" — dark pill with yellow arrow icon */
+.btn--hero-primary {
+  background: var(--brown-dark);
+  color: var(--white);
+  padding: 0.8rem 0.8rem 0.8rem 1.5rem;
+  font-size: 0.95rem;
+  gap: 0.75rem;
+}
+
+.btn--hero-primary:hover {
+  background: #2d1e10;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(28,18,10,0.25);
+}
+
+/* Yellow circle that holds the arrow icon */
+.btn__arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #F0C040;   /* golden yellow */
+  color: var(--brown-dark);
+  flex-shrink: 0;
+}
+
+.btn__arrow svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* Ghost / underline text link */
+.btn--ghost {
+  font-size: 0.92rem;
+  font-weight: 400;
+  color: var(--brown-dark);
+  padding: 0;
+  border-radius: 0;
+  border-bottom: 1.5px solid var(--brown-dark);
+  padding-bottom: 2px;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.btn--ghost:hover {
+  color: var(--orange);
+  border-color: var(--orange);
+}
+
+/* ============================================================
+   HERO SECTION
+   Two-column layout: text on left, forecast card on right
+   ============================================================ */
+.hero {
+  display: grid;
+  /* Left column takes ~55%, right column takes ~45% */
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 3rem;
+  padding: 4rem 2.5rem 3rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ── Left Column ──────────────────────────────────────────── */
+.hero__left {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Small all-caps eyebrow label */
+.hero__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  color: var(--orange);
+  text-transform: uppercase;
+}
+
+.eyebrow__dot {
+  font-size: 0.8rem;
+}
+
+/* 
+  The big headline.
+  "The clearest view of" → regular weight serif
+  "tomorrow's sun."     → italic, orange (handled by .headline__accent)
+*/
+.hero__headline {
+  font-family: var(--font-serif);
+  font-size: clamp(2.8rem, 5vw, 4rem);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--brown-dark);
+}
+
+/* The italic orange portion of the headline */
+.headline__accent {
+  font-style: italic;
+  color: var(--orange);
+  font-weight: 400;
+}
+
+/* Body copy paragraph */
+.hero__body {
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--brown-mid);
+  max-width: 42ch;   /* ~42 characters wide — comfortable reading line length */
+}
+
+/* CTA button row */
+.hero__ctas {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+  flex-wrap: wrap;
+  margin-top: 0.25rem;
+}
+
+/* ── Right Column: Forecast Card ──────────────────────────── */
+.hero__right {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.forecast-card {
+  background: var(--white);
+  border-radius: 20px;
+  padding: 1.75rem;
+  width: 100%;
+  max-width: 420px;
+  /* Multi-layer shadow for the soft floating look */
+  box-shadow:
+    0 2px 4px rgba(0,0,0,0.04),
+    0 8px 24px rgba(0,0,0,0.08),
+    0 24px 56px rgba(0,0,0,0.06);
+  /* Subtle entrance animation */
+  animation: cardFloat 0.8s var(--ease) both;
+}
+
+@keyframes cardFloat {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Card header: location row + badge */
+.card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.card__location {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.4rem;
+}
+
+/* Pink/red geo-pin dot */
+.location__dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #E0546A;
+  margin-top: 3px;
+  flex-shrink: 0;
+}
+
+.location__text {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  color: var(--brown-mid);
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+/* "DAY-AHEAD" badge — peach/salmon pill */
+.card__badge {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  line-height: 1.2;
+  color: var(--orange);
+  background: var(--badge-bg);
+  border-radius: 8px;
+  padding: 5px 20px;
+  white-space: nowrap;
+  text-align: left;
+  flex-shrink: 0;
+  margin-left: 8px;
+}
+
+/* Big kWh number */
+.card__output {
+  display: flex;
+  align-items: baseline;
+  gap: 0.15rem;
+  margin-bottom: 0.2rem;
+}
+
+/* 
+  "28.4" — large serif number, dark 
+  "kWh"  — large italic orange serif (the unit)
+  Both rendered at the same size but the unit is styled differently
+*/
+.output__number {
+  font-family: var(--font-serif);
+  font-size: 3.2rem;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  color: var(--brown-dark);
+  line-height: 1;
+}
+
+.output__unit {
+  font-family: var(--font-serif);
+  font-size: 3.2rem;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--orange);
+  line-height: 1;
+}
+
+/* Confidence sub-label */
+.card__confidence {
+  font-size: 0.78rem;
+  color: var(--brown-light);
+  margin-bottom: 1rem;
+}
+
+/* ── Area Chart ─*/
+
+.card__chart {
+  position: relative;
+  margin: 1rem -1.75rem 1.25rem -1.75rem;
+}
+
+.card__chart svg {
+  width: 80%;
+  height: 60px;
+  display: block;
+  margin: 0 auto;
+}
+
+.chart__peak-label {
+  position: absolute;
+  top: 0;
+  left: 55%;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--brown-light);
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+
+
+/* ── Contributing Factors ─────────────────────────────────── */
+.card__factors {
+  border-top: 1px solid var(--cream-mid);
+  padding-top: 1rem;
+}
+
+.factors__title {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  color: var(--brown-light);
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+/* Each row: label | bar | percentage */
+.factor {
+  display: grid;
+  grid-template-columns: 90px 1fr 36px;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.45rem;
+}
+
+.factor__label {
+  font-size: 0.8rem;
+  color: var(--brown-dark);
+  white-space: nowrap;
+}
+
+/* Grey track behind each bar */
+.factor__bar-track {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--cream-mid);
+  overflow: hidden;
+}
+
+/* 
+  Orange filled bar.
+  Width is driven by the --bar-w CSS custom property set
+  inline on each .factor element in the HTML.
+  This avoids needing JavaScript for simple proportional bars.
+*/
+.factor__bar {
+  height: 100%;
+  width: var(--bar-w, 50%);
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--orange) 0%, var(--orange-light) 100%);
+}
+
+.factor__pct {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--brown-mid);
+  text-align: right;
+}
+
+/* ============================================================
+   STATS STRIP
+   4-column grid separated from the hero by a thin top border
+   ============================================================ */
+.stats-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--cream-mid);
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 2.5rem;
+  gap: 2rem;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.stat__value {
+  font-family: var(--font-serif);
+  font-size: 2.2rem;
+  font-weight: 400;
+  color: var(--brown-dark);
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+
+/* Orange italic unit (e.g., "kWh", "%") that follows the number */
+.stat__unit {
+  font-style: italic;
+  color: var(--orange);
+  font-weight: 400;
+}
+
+/* Muted portion for "/16" */
+.stat__muted {
+  color: var(--brown-light);
+}
+
+/* "SHAP" — large italic serif, fully orange */
+.stat__value--serif-italic {
+  font-style: italic;
+  color: var(--orange);
+  font-size: 2.4rem;
+}
+
+.stat__label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--brown-light);
+}
+
+/* ============================================================
+   RESPONSIVE ADJUSTMENTS
+   The design collapses to single column on smaller screens
+   ============================================================ */
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+    padding: 2.5rem 1.5rem;
+  }
+
+  .hero__right {
+    justify-content: center;
+  }
+
+  .stats-strip {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 1.5rem;
+    gap: 1.5rem;
+  }
+
+  .nav__links {
+    display: none;   /* collapse nav links; would normally become a hamburger menu */
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-strip {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .hero__headline {
+    font-size: 2.2rem;
+  }
+
+  .nav {
+    padding: 0 1rem;
+  }
+
+  .nav__signin { display: none; }
+}
+#solarChart {
+  width: 100% !important;
+  height: 80px !important;
+}

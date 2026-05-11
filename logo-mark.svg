@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" role="img" aria-label="SolarProphet">
+  <title>SolarProphet</title>
+  <!-- Sun core (terra-red) -->
+  <circle cx="16" cy="16" r="7" fill="#c4380a"/>
+  <!-- Sun rays -->
+  <g stroke="#2d2520" stroke-width="1.6" stroke-linecap="round" fill="none">
+    <line x1="16" y1="2"  x2="16" y2="5"/>
+    <line x1="16" y1="27" x2="16" y2="30"/>
+    <line x1="2"  y1="16" x2="5"  y2="16"/>
+    <line x1="27" y1="16" x2="30" y2="16"/>
+    <line x1="6"  y1="6"  x2="8"  y2="8"/>
+    <line x1="24" y1="24" x2="26" y2="26"/>
+    <line x1="6"  y1="26" x2="8"  y2="24"/>
+    <line x1="24" y1="8"  x2="26" y2="6"/>
+  </g>
+</svg>
