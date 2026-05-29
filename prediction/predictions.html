@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SolarProphet — Predictions</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap">
+
+  <!-- Font Awesome icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <!-- Our CSS -->
+  <link rel="stylesheet" href="predictions.css" />
+</head>
+<body>
+
+  <div class="page">
+
+    <!-- ==============================
+         LEFT SIDEBAR
+         Same sidebar as map page
+    ============================== -->
+    <aside class="sidebar">
+
+      <div class="sidebar-logo">
+        <img src="favicon.svg" alt="SolarProphet" class="sidebar-logo-img">
+        <span class="sidebar-logo-text">SolarProphet</span>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="map.html" class="nav-item">
+          <i class="fa-regular fa-map"></i>
+          <span>Map</span>
+        </a>
+        <!-- Predictions is the active page -->
+        <a href="predictions.html" class="nav-item active">
+          <i class="fa-regular fa-chart-bar"></i>
+          <span>Predictions</span>
+        </a>
+        <a href="#" class="nav-item">
+          <i class="fa-regular fa-clone"></i>
+          <span>Compare areas</span>
+        </a>
+        <a href="#" class="nav-item">
+          <i class="fa-regular fa-square"></i>
+          <span>System config</span>
+        </a>
+        <a href="#" class="nav-item">
+          <i class="fa-solid fa-globe"></i>
+          <span>Explainability</span>
+        </a>
+        <a href="#" class="nav-item">
+          <i class="fa-solid fa-arrow-down-to-bracket"></i>
+          <span>Reports</span>
+        </a>
+        <a href="#" class="nav-item">
+          <i class="fa-regular fa-bookmark"></i>
+          <span>Saved</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="user-profile">
+          <div class="user-avatar">PA</div>
+          <div class="user-info">
+            <p class="user-name">Prince Asiedu</p>
+            <p class="user-role">Researcher</p>
+          </div>
+        </div>
+      </div>
+
+    </aside>
+
+
+    <!-- ==============================
+         MAIN CONTENT
+    ============================== -->
+    <main class="main">
+
+      <!-- Top bar -->
+      <div class="top-bar">
+        <div class="top-bar-left">
+          <!-- Breadcrumb: Map · Predictions · Ejisu, Ashanti -->
+          <p class="breadcrumb">
+            <a href="map.html">Map</a>
+            <span>·</span>
+            <a href="predictions.html">Predictions</a>
+            <span>·</span>
+            <span>Ejisu, Ashanti</span>
+          </p>
+          <h1 class="page-title">Forecast for Ejisu, Ashanti</h1>
+        </div>
+        <div class="top-bar-right">
+          <button class="save-button">Save</button>
+          <button class="export-button">Export PDF</button>
+        </div>
+      </div>
+
+      <!-- Scrollable content area -->
+      <div class="content">
+
+        <!-- ==============================
+             4 STAT CARDS ROW
+             Daily, Weekly, Monthly, Annual
+        ============================== -->
+        <div class="stat-cards">
+
+          <!-- Daily -->
+          <div class="stat-card">
+            <p class="stat-card-label">DAILY</p>
+            <div class="stat-card-value">
+              <span class="stat-number">28.4</span>
+              <span class="stat-unit">kWh</span>
+            </div>
+            <p class="stat-card-sub">±1.1 kWh</p>
+          </div>
+
+          <!-- Weekly -->
+          <div class="stat-card">
+            <p class="stat-card-label">WEEKLY</p>
+            <div class="stat-card-value">
+              <span class="stat-number">194</span>
+              <span class="stat-unit">kWh</span>
+            </div>
+            <p class="stat-card-sub">±8 kWh</p>
+          </div>
+
+          <!-- Monthly -->
+          <div class="stat-card">
+            <p class="stat-card-label">MONTHLY</p>
+            <div class="stat-card-value">
+              <span class="stat-number">832</span>
+              <span class="stat-unit">kWh</span>
+            </div>
+            <p class="stat-card-sub">May 2026</p>
+          </div>
+
+          <!-- Annual savings — slightly different background -->
+          <div class="stat-card stat-card--highlight">
+            <p class="stat-card-label">ANNUAL SAVINGS</p>
+            <div class="stat-card-value">
+              <span class="stat-number stat-number--large">GHS 5,470</span>
+            </div>
+            <p class="stat-card-sub">9,847 kWh × ECG tariff</p>
+          </div>
+
+        </div>
+
+
+        <!-- ==============================
+             FORECAST CURVE CHART
+        ============================== -->
+        <div class="chart-card">
+
+          <!-- Chart header -->
+          <div class="chart-header">
+            <div>
+              <h2 class="chart-title">Forecast curve</h2>
+              <p class="chart-subtitle">Expected output with 95% confidence band</p>
+            </div>
+            <!-- Time range tabs: 24h, 7 days, 30 days, 1 year -->
+            <div class="chart-tabs">
+              <button class="chart-tab" onclick="setChartTab(this)">24h</button>
+              <button class="chart-tab active" onclick="setChartTab(this)">7 days</button>
+              <button class="chart-tab" onclick="setChartTab(this)">30 days</button>
+              <button class="chart-tab" onclick="setChartTab(this)">1 year</button>
+            </div>
+          </div>
+
+          <!-- The SVG chart -->
+          <div class="chart-area">
+            <svg viewBox="0 0 900 300" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <!-- Gradient for the confidence band fill -->
+                <linearGradient id="bandGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%"   stop-color="#F0D4A0" stop-opacity="0.7"/>
+                  <stop offset="100%" stop-color="#F0D4A0" stop-opacity="0.2"/>
+                </linearGradient>
+              </defs>
+
+              <!-- 
+                95% CONFIDENCE BAND
+                This is the wide cream/yellow shaded area.
+                It shows the range the actual output could fall within.
+                Drawn as a filled shape behind everything else.
+              -->
+              <path
+                d="M0,200 C80,195 150,185 220,175 C290,165 340,155 400,148
+                   C460,141 520,138 580,142 C640,146 700,158 760,168
+                   C820,178 870,185 900,190
+                   L900,240 C870,238 820,232 760,225
+                   C700,218 640,210 580,205
+                   C520,200 460,198 400,200
+                   C340,202 290,205 220,210
+                   C150,215 80,220 0,225 Z"
+                fill="url(#bandGrad)"
+              />
+
+              <!-- 
+                PAST ACTUAL LINE (dashed)
+                Shows what the output actually was before today.
+                Dashed style means it is historical data.
+              -->
+              <path
+                d="M0,215 C80,210 150,200 220,190 C290,180 340,170 400,162"
+                fill="none"
+                stroke="#8B6B4A"
+                stroke-width="2"
+                stroke-dasharray="6 4"
+                stroke-linecap="round"
+              />
+
+              <!-- 
+                PREDICTED LINE (solid orange/red)
+                Shows the forecast from today onwards.
+                The dot marks "Today" where past meets future.
+              -->
+              <path
+                d="M400,162 C460,155 520,150 580,155
+                   C640,160 700,175 760,185
+                   C820,195 870,200 900,205"
+                fill="none"
+                stroke="#B84A20"
+                stroke-width="2.5"
+                stroke-linecap="round"
+              />
+
+              <!-- "Today" dot — where past meets future -->
+              <circle cx="400" cy="162" r="5" fill="#B84A20"/>
+
+              <!-- "Today" label above the dot -->
+              <text x="400" y="148" text-anchor="middle"
+                font-family="DM Mono, monospace"
+                font-size="11"
+                fill="#9C7B5E">Today</text>
+
+            </svg>
+
+            <!-- Day labels along the bottom of the chart -->
+            <div class="chart-days">
+              <span>Mon</span>
+              <span>Tue</span>
+              <span>Wed</span>
+              <span>Thu</span>
+              <span>Fri</span>
+              <span>Sat</span>
+              <span>Sun</span>
+              <span>Mon</span>
+            </div>
+          </div>
+
+          <!-- Chart legend at the bottom -->
+          <div class="chart-legend">
+            <div class="legend-item">
+              <div class="legend-line legend-line--solid"></div>
+              <span>Predicted</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-line legend-line--dashed"></div>
+              <span>Past actual</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-box"></div>
+              <span>95% confidence</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="predictions.js"></script>
+
+</body>
+</html>

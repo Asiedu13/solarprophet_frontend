@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SolarProphet</title>
+
+  <!-- This loads our fonts from Google (needs internet) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap">
+
+  <!-- This loads icons (the arrow icon on the button) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <!-- This loads our own CSS file that styles the page -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ==============================
+       TOP NAVIGATION BAR
+       Contains: logo, links, buttons
+  ============================== -->
+  <nav>
+
+    <!-- Logo: image + brand name side by side -->
+    <div class="logo">
+      <img src="favicon.svg" alt="SolarProphet logo" class="logo-image">
+      <span class="logo-text">SolarProphet</span>
+    </div>
+
+    <!-- Navigation links in the middle -->
+    <ul class="nav-links">
+      <li><a href="#">How it works</a></li>
+      <li><a href="#">For Installers</a></li>
+      <li><a href="#">For Government</a></li>
+      <li><a href="#">Research</a></li>
+      <li><a href="#">Pricing</a></li>
+    </ul>
+
+    <!-- Sign in and Get a forecast button on the right -->
+    <div class="nav-actions">
+      <a href="#" class="sign-in">Sign in</a>
+      <a href="#" class="nav-button">Get a forecast</a>
+    </div>
+
+  </nav>
+
+
+  <!-- ==============================
+       HERO SECTION
+       The main part of the page.
+       Left side: text and buttons
+       Right side: forecast card
+  ============================== -->
+  <section class="hero">
+
+    <!-- LEFT SIDE: Text content -->
+    <div class="hero-text">
+
+      <!-- Small label at the top -->
+      <p class="label">◎ Solar Forecasting · Ghana · V1</p>
+
+      <!-- Big headline. The orange italic part is wrapped in a span -->
+      <h1>
+        The clearest view <br>
+        of <span class="orange-italic">tomorrow's sun.</span>
+      </h1>
+
+      <!-- Body paragraph -->
+      <p class="description">
+        SolarProphet predicts solar output for any rooftop, district,
+        or region in Ghana — with explainable AI engineered for energy
+        professionals, system designers, and grid analysts who demand
+        transparent, reproducible forecasts.
+      </p>
+
+      <!-- Two buttons side by side -->
+      <div class="hero-buttons">
+
+        <!-- Dark pill button with yellow arrow circle -->
+        <a href="#" class="main-button">
+          Get a forecast
+          <span class="arrow-circle">
+            <i class="fa-solid fa-arrow-right"></i>
+          </span>
+        </a>
+
+        <!-- Simple underline link -->
+        <a href="#" class="text-link">Read the methodology</a>
+
+      </div>
+    </div>
+
+
+    <!-- RIGHT SIDE: The white forecast card -->
+    <div class="hero-card">
+      <div class="card">
+
+        <!-- Card top row: location on left, badge on right -->
+        <div class="card-top">
+          <div class="card-location">
+            <span class="pink-dot"></span>
+            <span class="location-text">EJISU, ASHANTI · 6.74°N, 1.36°W</span>
+          </div>
+          <span class="day-ahead-badge">DAY-<br>AHEAD</span>
+        </div>
+
+        <!-- Big number showing expected output -->
+        <div class="card-output">
+          <span class="output-number">28.4</span>
+          <span class="output-unit">kWh</span>
+        </div>
+        <p class="output-label">expected output · ±1.1 kWh confidence</p>
+
+        <!-- The solar curve graph -->
+        <div class="graph-area">
+
+          <!-- peak label above the curve -->
+          <span class="peak-label">peak · 12:30</span>
+
+          <!-- Hand drawn SVG bell curve graph -->
+          <svg viewBox="0 0 400 110" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <!-- Gradient: orange at top fading to transparent at bottom -->
+              <linearGradient id="sunGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%"   stop-color="#D96B2A" stop-opacity="0.4"/>
+                <stop offset="100%" stop-color="#F5E9D8" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+
+            <!-- The filled orange area under the curve -->
+            <path
+              d="M0,110 C30,108 60,100 90,82 C120,64 145,38 175,18 C190,8 200,4 210,4 C220,4 230,8 245,18 C275,38 300,64 330,82 C360,100 380,108 400,110 Z"
+              fill="url(#sunGrad)"
+            />
+
+            <!-- The curve line on top -->
+            <path
+              d="M0,110 C30,108 60,100 90,82 C120,64 145,38 175,18 C190,8 200,4 210,4 C220,4 230,8 245,18 C275,38 300,64 330,82 C360,100 380,108 400,110"
+              fill="none"
+              stroke="#C45E20"
+              stroke-width="2.5"
+              stroke-linecap="round"
+            />
+
+            <!-- Small dot at the peak -->
+            <circle cx="210" cy="4" r="4" fill="#C45E20"/>
+          </svg>
+
+        </div>
+
+        <!-- Contributing factors section -->
+        <div class="factors">
+          <p class="factors-title">TOP CONTRIBUTING FACTORS</p>
+
+          <!-- Each row: name | bar | percentage -->
+          <!-- Change --w value to control how long each bar is -->
+
+          <div class="factor-row">
+            <span class="factor-name">Cloud cover</span>
+            <div class="bar-track"><div class="bar" style="--w: 78%"></div></div>
+            <span class="factor-pct">+38%</span>
+          </div>
+
+          <div class="factor-row">
+            <span class="factor-name">GHI</span>
+            <div class="bar-track"><div class="bar" style="--w: 50%"></div></div>
+            <span class="factor-pct">+24%</span>
+          </div>
+
+          <div class="factor-row">
+            <span class="factor-name">Temperature</span>
+            <div class="bar-track"><div class="bar" style="--w: 32%"></div></div>
+            <span class="factor-pct">+15%</span>
+          </div>
+
+          <div class="factor-row">
+            <span class="factor-name">Tilt angle</span>
+            <div class="bar-track"><div class="bar" style="--w: 20%"></div></div>
+            <span class="factor-pct">+9%</span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- ==============================
+       STATS STRIP
+       4 numbers at the bottom
+  ============================== -->
+  <div class="stats">
+
+    <div class="stat">
+      <p class="stat-number">5.2 <em>kWh</em></p>
+      <p class="stat-label">AVG. DAILY / M²</p>
+    </div>
+
+    <div class="stat">
+      <p class="stat-number">±4<em>%</em></p>
+      <p class="stat-label">DAY-AHEAD TOLERANCE</p>
+    </div>
+
+    <div class="stat">
+      <p class="stat-number">16<span class="muted">/16</span></p>
+      <p class="stat-label">REGIONS COVERED</p>
+    </div>
+
+    <div class="stat">
+      <p class="stat-number orange-serif">SHAP</p>
+      <p class="stat-label">EXPLAINABILITY BUILT IN</p>
+    </div>
+
+  </div>
+
+  <!-- Load our JavaScript file last -->
+  <script src="main.js"></script>
+
+</body>
+</html>

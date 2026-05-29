@@ -1,0 +1,655 @@
+/* ================================================
+   SOLARPROPHET — systemconfig.css
+================================================ */
+
+:root {
+  --cream:       #F7EEE2;
+  --cream-light: #FBF5ED;
+  --white:       #FFFFFF;
+  --dark:        #1C120A;
+  --brown:       #5A3E28;
+  --brown-light: #9C7B5E;
+  --orange:      #C45E20;
+  --border:      #EFE0CB;
+  --badge-bg:    #F2D8C2;
+  --green-bg:    #EAF5EE;
+  --green-text:  #2E7D52;
+
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-mono:  'DM Mono', monospace;
+  --font-body:  'DM Sans', sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font-body);
+  color: var(--dark);
+  background: var(--cream);
+  height: 100vh;
+  overflow: hidden;
+}
+
+a { text-decoration: none; color: inherit; }
+button { cursor: pointer; border: none; font-family: var(--font-body); }
+
+.page { display: flex; height: 100vh; }
+
+
+/* ==============================
+   SIDEBAR
+============================== */
+.sidebar {
+  width: 260px;
+  background: var(--white);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 1rem;
+  flex-shrink: 0;
+  overflow-y: auto;
+}
+
+.sidebar-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  padding: 0 0.5rem;
+}
+
+.sidebar-logo-img { width: 22px; height: 22px; object-fit: contain; }
+
+.sidebar-logo-text {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--dark);
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  flex: 1;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0.75rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color: var(--brown);
+  transition: background 0.15s, color 0.15s;
+}
+
+.nav-item:hover { background: var(--cream); color: var(--dark); }
+
+.nav-item.active {
+  background: var(--badge-bg);
+  color: var(--orange);
+  font-weight: 500;
+}
+
+.nav-item i { width: 18px; text-align: center; font-size: 0.95rem; }
+
+.sidebar-bottom {
+  border-top: 1px solid var(--border);
+  padding-top: 1rem;
+  margin-top: 1rem;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.user-profile:hover { background: var(--cream); }
+
+.user-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--orange);
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.user-name { font-size: 0.85rem; font-weight: 500; color: var(--dark); }
+.user-role { font-size: 0.75rem; color: var(--brown-light); }
+
+
+/* ==============================
+   MAIN CONTENT
+============================== */
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--white);
+  flex-shrink: 0;
+}
+
+.page-title {
+  font-family: var(--font-serif);
+  font-size: 1.8rem;
+  font-weight: 400;
+  color: var(--dark);
+}
+
+.page-subtitle {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  color: var(--brown-light);
+  margin-top: 0.25rem;
+}
+
+.top-bar-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.outline-button {
+  background: var(--white);
+  color: var(--dark);
+  font-size: 0.875rem;
+  padding: 0.5rem 1.25rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  transition: background 0.2s;
+}
+
+.outline-button:hover { background: var(--cream); }
+
+.filled-button {
+  background: var(--orange);
+  color: white;
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 0.5rem 1.25rem;
+  border-radius: 999px;
+  transition: background 0.2s;
+}
+
+.filled-button:hover { background: #A8501A; }
+
+
+/* ==============================
+   SCROLLABLE CONTENT
+============================== */
+.content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.5rem;
+}
+
+/* Two column layout */
+.two-col {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+/* Shared card */
+.card {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  margin-bottom: 1rem;
+}
+
+.card-title {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: var(--dark);
+  margin-bottom: 1rem;
+}
+
+
+/* ==============================
+   PANEL TYPE
+============================== */
+.panel-options {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.panel-option {
+  flex: 1;
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  padding: 0.85rem 1rem;
+  cursor: pointer;
+  position: relative;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.panel-option:hover {
+  border-color: var(--orange);
+  background: var(--cream-light);
+}
+
+/* Selected panel — orange border */
+.panel-option.selected {
+  border-color: var(--orange);
+  background: var(--cream-light);
+}
+
+/* Orange checkmark on selected panel */
+.panel-check {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--orange);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+}
+
+.panel-name {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--dark);
+}
+
+.panel-eff {
+  font-size: 0.75rem;
+  color: var(--brown-light);
+  margin-top: 0.2rem;
+}
+
+
+/* ==============================
+   SYSTEM CAPACITY SLIDER
+============================== */
+.capacity-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+/* "5.0 kW" value — orange italic */
+.capacity-value {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  color: var(--orange);
+  font-style: italic;
+}
+
+.capacity-value em {
+  font-style: italic;
+}
+
+/*
+  The range slider — styled to match the orange
+  design of the page. The thumb is the draggable
+  circle and the track is the line behind it.
+*/
+.capacity-slider {
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  background: linear-gradient(
+    to right,
+    var(--orange) 0%,
+    var(--orange) 27%,   /* 27% = position of 5kW on 1-15 scale */
+    var(--border) 27%,
+    var(--border) 100%
+  );
+  outline: none;
+  border: none;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+/* The draggable circle on the slider */
+.capacity-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--white);
+  border: 2px solid var(--orange);
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+}
+
+.capacity-slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--white);
+  border: 2px solid var(--orange);
+  cursor: pointer;
+}
+
+/* 1kW / 5kW / 15kW labels */
+.slider-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+}
+
+.slider-labels span {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--brown-light);
+}
+
+
+/* ==============================
+   TILT + ORIENTATION SIDE BY SIDE
+============================== */
+.two-small {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.two-small .card { margin-bottom: 0; }
+
+/* Tilt diagram + controls side by side */
+.tilt-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.tilt-diagram svg {
+  width: 80px;
+  height: 60px;
+}
+
+.tilt-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Number input box for tilt angle */
+.tilt-input {
+  width: 52px;
+  padding: 0.4rem;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--dark);
+  text-align: center;
+  outline: none;
+  background: var(--cream-light);
+}
+
+.tilt-input:focus { border-color: var(--orange); }
+
+.tilt-note {
+  font-size: 0.72rem;
+  color: var(--brown-light);
+  text-align: center;
+  line-height: 1.4;
+}
+
+/* Compass + dropdown side by side */
+.orientation-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.compass svg {
+  width: 80px;
+  height: 80px;
+}
+
+.orientation-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Direction dropdown */
+.orientation-select {
+  padding: 0.4rem 0.6rem;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--dark);
+  background: var(--cream-light);
+  outline: none;
+  cursor: pointer;
+}
+
+.orientation-select:focus { border-color: var(--orange); }
+
+.orientation-note {
+  font-size: 0.72rem;
+  color: var(--brown-light);
+  line-height: 1.4;
+}
+
+
+/* ==============================
+   RIGHT COLUMN: LIVE PREVIEW
+============================== */
+.preview-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  position: sticky;
+  top: 0;
+}
+
+/* "LIVE PREVIEW · UPDATES AS YOU TYPE" label */
+.live-label {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  color: var(--brown-light);
+}
+
+/* The white preview card */
+.preview-card {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.preview-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.preview-location {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+/* Pink dot beside location name */
+.pink-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #E0546A;
+  flex-shrink: 0;
+}
+
+.preview-location-text {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  color: var(--brown-light);
+}
+
+/* "DAY-AHEAD" badge */
+.day-ahead-badge {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--orange);
+  background: var(--badge-bg);
+  border-radius: 6px;
+  padding: 0.3rem 0.6rem;
+}
+
+/* Big 28.4 kWh number */
+.preview-output {
+  display: flex;
+  align-items: baseline;
+}
+
+.preview-number {
+  font-family: var(--font-serif);
+  font-size: 3rem;
+  font-weight: 400;
+  color: var(--dark);
+  line-height: 1;
+}
+
+.preview-unit {
+  font-family: var(--font-serif);
+  font-size: 3rem;
+  font-style: italic;
+  color: var(--orange);
+  line-height: 1;
+}
+
+.preview-sub {
+  font-size: 0.78rem;
+  color: var(--brown-light);
+}
+
+/* Green "+3.2 kWh vs. default config" row */
+.vs-default {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--green-bg);
+  color: var(--green-text);
+  border-radius: 8px;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.82rem;
+  font-weight: 500;
+}
+
+/* Comparison bars section */
+.comparison { display: flex; flex-direction: column; gap: 0.3rem; }
+
+.comparison-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.comparison-label {
+  font-size: 0.78rem;
+  color: var(--brown);
+}
+
+.comparison-value {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--dark);
+  font-weight: 500;
+}
+
+/* Bar track */
+.bar-track {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--border);
+  overflow: hidden;
+  margin-top: 0.2rem;
+}
+
+/* Bars */
+.bar {
+  height: 100%;
+  width: var(--w, 50%);
+  border-radius: 3px;
+  transition: width 0.6s ease;
+}
+
+/* Your config — orange gradient */
+.bar--orange {
+  background: linear-gradient(90deg, #C45E20 0%, #F0A830 100%);
+}
+
+/* Default — lighter */
+.bar--light {
+  background: #D4B896;
+}
+
+/* Best possible — grey */
+.bar--grey {
+  background: #C8B8A8;
+}
+
+/* Suggestion card */
+.suggestion-card {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 1.25rem;
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.suggestion-icon {
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.suggestion-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--dark);
+  margin-bottom: 0.3rem;
+}
+
+.suggestion-text {
+  font-size: 0.8rem;
+  color: var(--brown);
+  line-height: 1.5;
+}

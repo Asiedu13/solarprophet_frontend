@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SolarProphet — Explainability</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap">
+
+  <!-- Font Awesome icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <!-- Our CSS -->
+  <link rel="stylesheet" href="explainability.css" />
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ==============================
+       LEFT SIDEBAR
+  ============================== -->
+  <aside class="sidebar">
+
+    <div class="sidebar-logo">
+      <img src="favicon.svg" alt="SolarProphet" class="sidebar-logo-img">
+      <span class="sidebar-logo-text">SolarProphet</span>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="map.html" class="nav-item">
+        <i class="fa-regular fa-map"></i>
+        <span>Map</span>
+      </a>
+      <a href="predictions.html" class="nav-item">
+        <i class="fa-regular fa-chart-bar"></i>
+        <span>Predictions</span>
+      </a>
+      <a href="#" class="nav-item">
+        <i class="fa-regular fa-clone"></i>
+        <span>Compare areas</span>
+      </a>
+      <a href="#" class="nav-item">
+        <i class="fa-regular fa-square"></i>
+        <span>System config</span>
+      </a>
+      <!-- Explainability is the active page -->
+      <a href="explainability.html" class="nav-item active">
+        <i class="fa-solid fa-globe"></i>
+        <span>Explainability</span>
+      </a>
+      <a href="#" class="nav-item">
+        <i class="fa-solid fa-arrow-down-to-bracket"></i>
+        <span>Reports</span>
+      </a>
+      <a href="#" class="nav-item">
+        <i class="fa-regular fa-bookmark"></i>
+        <span>Saved</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <div class="user-profile">
+        <div class="user-avatar">PA</div>
+        <div class="user-info">
+          <p class="user-name">Prince Asiedu</p>
+          <p class="user-role">Researcher</p>
+        </div>
+      </div>
+    </div>
+
+  </aside>
+
+
+  <!-- ==============================
+       MAIN CONTENT
+  ============================== -->
+  <main class="main">
+
+    <!-- Top bar -->
+    <div class="top-bar">
+      <div class="top-bar-left">
+        <h1 class="page-title">Why this prediction?</h1>
+        <p class="page-subtitle">SHAP FEATURE IMPORTANCE · EJISU, ASHANTI · 28.4 KWH FORECAST</p>
+      </div>
+      <div class="top-bar-right">
+        <button class="outline-button">Compare to baseline</button>
+        <button class="filled-button">Export explanation</button>
+      </div>
+    </div>
+
+    <!-- Scrollable content -->
+    <div class="content">
+
+      <!-- Top row: SHAP waterfall + Feature contributions -->
+      <div class="top-row">
+
+        <!-- ==============================
+             LEFT: SHAP WATERFALL CARD
+        ============================== -->
+        <div class="card shap-card">
+
+          <div class="shap-header">
+            <div>
+              <h2 class="card-title">SHAP waterfall</h2>
+              <p class="card-subtitle">
+                How each feature pushed the prediction from
+                baseline (23.2 kWh) to final (28.4 kWh)
+              </p>
+            </div>
+            <!-- Local / Global toggle -->
+            <div class="toggle-tabs">
+              <button class="toggle-tab active" onclick="setToggle(this)">Local</button>
+              <button class="toggle-tab" onclick="setToggle(this)">Global</button>
+            </div>
+          </div>
+
+          <!--
+            SHAP WATERFALL CHART
+            Each bar shows how much a feature pushed
+            the prediction up (orange) or down (blue).
+            Built with SVG — no library needed.
+          -->
+          <div class="shap-chart">
+            <svg viewBox="0 0 460 280" xmlns="http://www.w3.org/2000/svg">
+
+              <!-- Y axis labels -->
+              <text x="42" y="58"  font-family="DM Mono,monospace" font-size="9" fill="#9C7B5E" text-anchor="end">32 kWh</text>
+              <text x="42" y="108" font-family="DM Mono,monospace" font-size="9" fill="#9C7B5E" text-anchor="end">28 kWh</text>
+              <text x="42" y="158" font-family="DM Mono,monospace" font-size="9" fill="#9C7B5E" text-anchor="end">24 kWh</text>
+              <text x="42" y="208" font-family="DM Mono,monospace" font-size="9" fill="#9C7B5E" text-anchor="end">20 kWh</text>
+
+              <!-- Horizontal grid lines -->
+              <line x1="48" y1="54"  x2="450" y2="54"  stroke="#EFE0CB" stroke-width="1"/>
+              <line x1="48" y1="104" x2="450" y2="104" stroke="#EFE0CB" stroke-width="1"/>
+              <line x1="48" y1="154" x2="450" y2="154" stroke="#EFE0CB" stroke-width="1"/>
+              <line x1="48" y1="204" x2="450" y2="204" stroke="#EFE0CB" stroke-width="1"/>
+
+              <!-- BASELINE BAR (grey) — starts at bottom goes up to 23.2 kWh -->
+              <rect x="58"  y="166" width="48" height="38" rx="3" fill="#C8B8A8"/>
+
+              <!-- Dotted connector lines between bars -->
+              <line x1="106" y1="166" x2="116" y2="166" stroke="#9C7B5E" stroke-width="1" stroke-dasharray="3 2"/>
+
+              <!-- CLOUD COVER BAR (dark orange) +38% — biggest upward push -->
+              <rect x="116" y="96" width="48" height="70" rx="3" fill="#C45E20"/>
+
+              <line x1="164" y1="96" x2="174" y2="96" stroke="#9C7B5E" stroke-width="1" stroke-dasharray="3 2"/>
+
+              <!-- GHI BAR (medium orange) +24% -->
+              <rect x="174" y="70" width="48" height="26" rx="3" fill="#D96B2A"/>
+
+              <line x1="222" y1="70" x2="232" y2="70" stroke="#9C7B5E" stroke-width="1" stroke-dasharray="3 2"/>
+
+              <!-- TEMPERATURE BAR (light orange) +15% -->
+              <rect x="232" y="54" width="48" height="16" rx="3" fill="#E8902A"/>
+
+              <line x1="280" y1="54" x2="290" y2="54" stroke="#9C7B5E" stroke-width="1" stroke-dasharray="3 2"/>
+
+              <!-- TILT ANGLE BAR (amber) +9% -->
+              <rect x="290" y="44" width="48" height="10" rx="3" fill="#F0A830"/>
+
+              <line x1="338" y1="44" x2="348" y2="44" stroke="#9C7B5E" stroke-width="1" stroke-dasharray="3 2"/>
+
+              <!-- HUMIDITY BAR (blue) -7% — pushes prediction DOWN -->
+              <rect x="348" y="44" width="48" height="10" rx="3" fill="#5B8DB8"/>
+
+              <line x1="348" y1="54" x2="396" y2="54" stroke="#9C7B5E" stroke-width="1" stroke-dasharray="3 2"/>
+
+              <!-- FINAL BAR (dark red) — shows the final value 28.4 kWh -->
+              <rect x="396" y="54" width="48" height="150" rx="3" fill="#B84A20"/>
+
+              <!-- X axis labels -->
+              <text x="82"  y="228" font-family="DM Mono,monospace" font-size="8" fill="#9C7B5E" text-anchor="middle">Baseline</text>
+              <text x="82"  y="238" font-family="DM Mono,monospace" font-size="8" fill="#9C7B5E" text-anchor="middle">23.2</text>
+
+              <text x="140" y="228" font-family="DM Mono,monospace" font-size="8" fill="#C45E20" text-anchor="middle">Cloud</text>
+              <text x="140" y="238" font-family="DM Mono,monospace" font-size="8" fill="#C45E20" text-anchor="middle">+38%</text>
+
+              <text x="198" y="228" font-family="DM Mono,monospace" font-size="8" fill="#C45E20" text-anchor="middle">GHI</text>
+              <text x="198" y="238" font-family="DM Mono,monospace" font-size="8" fill="#C45E20" text-anchor="middle">+24%</text>
+
+              <text x="256" y="228" font-family="DM Mono,monospace" font-size="8" fill="#C45E20" text-anchor="middle">Temp</text>
+              <text x="256" y="238" font-family="DM Mono,monospace" font-size="8" fill="#C45E20" text-anchor="middle">+15%</text>
+
+              <text x="314" y="228" font-family="DM Mono,monospace" font-size="8" fill="#C45E20" text-anchor="middle">Tilt</text>
+              <text x="314" y="238" font-family="DM Mono,monospace" font-size="8" fill="#C45E20" text-anchor="middle">+9%</text>
+
+              <text x="372" y="228" font-family="DM Mono,monospace" font-size="8" fill="#5B8DB8" text-anchor="middle">Humid</text>
+              <text x="372" y="238" font-family="DM Mono,monospace" font-size="8" fill="#5B8DB8" text-anchor="middle">-7%</text>
+
+              <text x="420" y="228" font-family="DM Mono,monospace" font-size="8" fill="#9C7B5E" text-anchor="middle">Final</text>
+              <text x="420" y="238" font-family="DM Mono,monospace" font-size="8" fill="#9C7B5E" text-anchor="middle">28.4</text>
+
+            </svg>
+          </div>
+        </div>
+
+
+        <!-- ==============================
+             RIGHT: FEATURE CONTRIBUTIONS
+        ============================== -->
+        <div class="card contributions-card">
+          <h2 class="card-title">Feature contributions</h2>
+
+          <!-- Cloud cover +38% -->
+          <div class="feature">
+            <div class="feature-header">
+              <span class="feature-name">Cloud cover</span>
+              <span class="feature-pct feature-pct--positive">+38%</span>
+            </div>
+            <div class="feature-bar-track">
+              <div class="feature-bar feature-bar--orange" style="--w: 90%"></div>
+            </div>
+            <p class="feature-detail">Today: 12% · Avg: 38% · Below average</p>
+          </div>
+
+          <!-- GHI +24% -->
+          <div class="feature">
+            <div class="feature-header">
+              <span class="feature-name">GHI (irradiance)</span>
+              <span class="feature-pct feature-pct--positive">+24%</span>
+            </div>
+            <div class="feature-bar-track">
+              <div class="feature-bar feature-bar--orange" style="--w: 70%"></div>
+            </div>
+            <p class="feature-detail">5.8 kWh/m²/day · Strong</p>
+          </div>
+
+          <!-- Temperature +15% -->
+          <div class="feature">
+            <div class="feature-header">
+              <span class="feature-name">Temperature</span>
+              <span class="feature-pct feature-pct--positive">+15%</span>
+            </div>
+            <div class="feature-bar-track">
+              <div class="feature-bar feature-bar--orange" style="--w: 50%"></div>
+            </div>
+            <p class="feature-detail">28°C · Optimal range</p>
+          </div>
+
+          <!-- Tilt angle +9% -->
+          <div class="feature">
+            <div class="feature-header">
+              <span class="feature-name">Tilt angle</span>
+              <span class="feature-pct feature-pct--positive">+9%</span>
+            </div>
+            <div class="feature-bar-track">
+              <div class="feature-bar feature-bar--orange" style="--w: 32%"></div>
+            </div>
+            <p class="feature-detail">15° · Near-optimal for latitude</p>
+          </div>
+
+          <!-- Humidity -7% -->
+          <div class="feature">
+            <div class="feature-header">
+              <span class="feature-name">Humidity</span>
+              <span class="feature-pct feature-pct--negative">-7%</span>
+            </div>
+            <div class="feature-bar-track">
+              <div class="feature-bar feature-bar--blue" style="--w: 22%"></div>
+            </div>
+            <p class="feature-detail">82% · Slightly elevated</p>
+          </div>
+
+        </div>
+      </div>
+
+
+      <!-- Bottom row: 3 small info cards -->
+      <div class="bottom-row">
+        <div class="card small-card">
+          <div class="small-card-icon small-card-icon--pink"></div>
+          <p class="small-card-label">XGBoost · Day-ahead</p>
+        </div>
+        <div class="card small-card">
+          <div class="small-card-icon small-card-icon--blue"></div>
+          <p class="small-card-label">Validation: ±4% RMSE</p>
+        </div>
+        <div class="card small-card">
+          <div class="small-card-icon small-card-icon--green"></div>
+          <p class="small-card-label">Harmattan-aware</p>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<script src="explainability.js"></script>
+
+</body>
+</html>

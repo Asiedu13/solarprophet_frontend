@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SolarProphet</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <script src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+<body>
+
+  <!-- =========================================================
+       NAVIGATION
+       - Logo on the left, nav links in the center, actions on right
+       - "Get a forecast" is the primary CTA button (burnt orange)
+  ========================================================= -->
+  <nav class="nav">
+    <div class="logo">
+      <img src="logo-mark.svg" alt="SolarProphet logo" class="nav__sun">
+      <span class="nav__brand">SolarProphet</span>
+    </div>
+
+    <div class="nav__actions">
+      <div><a href="#">How it works</a></div>
+      <a href="#" class="btn btn--primary">Get a forecast</a>
+    </div>
+  </nav>
+
+  <!-- =========================================================
+       HERO SECTION
+       - Left: eyebrow label, headline (serif + italic orange), 
+               body copy, two CTA buttons
+       - Right: floating forecast card (the dashboard widget)
+  ========================================================= -->
+  <section class="hero">
+    <div class="hero__left">
+
+      <!-- this is for the dots -->
+      <p class="hero__eyebrow">
+        <span class="eyebrow__dot">◎</span>
+        Solar Forecasting &middot; Ghana &middot; V1
+      </p>
+
+      <!-- 
+        Headline uses a classic serif. The words "tomorrow's sun."
+        are rendered in italic burnt-orange — achieved with a <em> 
+        inside the <h1> styled separately.
+      -->
+      <h1 class="hero__headline">
+        The clearest view<br>
+        of <em class="headline__accent">tomorrow's sun.</em>
+      </h1>
+
+      <p class="hero__body">
+        SolarProphet predicts solar output for any rooftop, 
+        district, or region in Ghana with 
+        explainable AI engineered for energy 
+        professionals, system designers, and grid 
+        analysts who demand transparent, reproducible forecasts.
+      </p>
+
+      <div class="hero__ctas">
+        <!-- Primary dark pill button with yellow arrow circle -->
+        <a href="#" class="btn btn--hero-primary">
+          Get a forecast
+        </a>
+
+<!-- Ghost / underline link -->
+        <a href="#" class="btn btn--ghost">Read the methodology</a>
+      </div>
+    </div>
+
+    <!-- =========================================================
+         FORECAST CARD (the white rounded card on the right)
+         Contains: location header, big kWh number, area chart,
+         and a "top contributing factors" bar list
+    ========================================================= -->
+    <div class="hero__right">
+      <div class="forecast-card">
+
+        <!-- Card header row: location + "DAY-AHEAD" badge -->
+        <div class="card__header">
+          <div class="card__location">
+          <span class="location__text">📍 EJISU, ASHANTI · 6.74°N, <br> 
+              1.36°W</span>
+          </div>
+          <span class="card__badge">DAY-<br>AHEAD</span>
+        </div>
+
+        <!-- Big expected output number -->
+        <div class="card__output">
+          <span class="output__number">28.4</span><span class="output__unit">kWh</span>
+        </div>
+        <p class="card__confidence">expected output · ±1.1 kWh confidence</p>
+
+        <!-- The graph was obtain using google charts, though it does not
+          really look like what is on the design, it looks similar and understandable-->
+        
+      <div class="card__chart">
+          <div id="solar-chart"></div>
+      </div>
+
+      <!-- Contributing factors bar chart -->
+        <div class="card__factors">
+          <p class="factors__title">TOP CONTRIBUTING FACTORS</p>
+
+          <!-- 
+            Each factor row: label | orange bar (relative width) | percentage
+            The bar widths below are proportional to the values shown 
+            in the screenshot: 38%, 24%, 15%, 9%
+          -->
+          <div class="factor">
+            <span class="factor__label">Cloud cover</span>
+            <div class="factor__bar-track">
+              <div class="factor__bar" style="--bar-w: 78%"></div>
+            </div>
+            <span class="factor__pct">+38%</span>
+          </div>
+
+          <div class="factor">
+            <span class="factor__label">GHI</span>
+            <div class="factor__bar-track">
+              <div class="factor__bar" style="--bar-w: 50%"></div>
+            </div>
+            <span class="factor__pct">+24%</span>
+          </div>
+
+          <div class="factor">
+            <span class="factor__label">Temperature</span>
+            <div class="factor__bar-track">
+              <div class="factor__bar" style="--bar-w: 32%"></div>
+            </div>
+            <span class="factor__pct">+15%</span>
+          </div>
+
+          <div class="factor">
+            <span class="factor__label">Tilt angle</span>
+            <div class="factor__bar-track">
+              <div class="factor__bar" style="--bar-w: 20%"></div>
+            </div>
+            <span class="factor__pct">+9%</span>
+          </div>
+        </div>
+
+      </div><!-- /.forecast-card -->
+    </div><!-- /.hero__right -->
+  </section>
+
+  <!-- =========================================================
+       STATS STRIP
+       - 4 metric blocks separated by a top border
+       - Orange italic kWh text sits next to regular weight numbers
+  ========================================================= -->
+  <div class="stats-strip">
+
+    <div class="stat">
+      <p class="stat__value">5.2 <em class="stat__unit">kWh</em></p>
+      <p class="stat__label">AVG. DAILY / M²</p>
+    </div>
+
+    <div class="stat">
+      <p class="stat__value">±4<em class="stat__unit">%</em></p>
+      <p class="stat__label">DAY-AHEAD TOLERANCE</p>
+    </div>
+
+    <div class="stat">
+      <!-- 16 in normal weight, /16 slightly lighter -->
+      <p class="stat__value">16<span class="stat__muted">/16</span></p>
+      <p class="stat__label">REGIONS COVERED</p>
+    </div>
+
+    <div class="stat">
+      <p class="stat__value stat__value--serif-italic">SHAP</p>
+      <p class="stat__label">EXPLAINABILITY BUILT IN</p>
+    </div>
+
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>

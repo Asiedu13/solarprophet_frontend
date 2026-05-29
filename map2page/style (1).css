@@ -1,0 +1,523 @@
+/* ================================================
+   SOLARPROPHET — style.css
+   
+   HOW TO READ THIS FILE:
+   - Colors are saved at the top as "variables"
+     so you only need to change a color in one place
+   - Each section has a comment explaining what it styles
+================================================ */
+
+
+/* ------------------------------------------------
+   COLORS AND FONTS
+   Change these to update the whole page at once
+------------------------------------------------ */
+:root {
+  --cream:        #F7EEE2;   /* page background color */
+  --white:        #FFFFFF;   /* card background */
+  --dark:         #1C120A;   /* main text color */
+  --brown:        #5A3E28;   /* secondary text */
+  --brown-light:  #9C7B5E;   /* small labels */
+  --orange:       #C45E20;   /* main orange accent */
+  --orange-light: #D96B2A;   /* slightly lighter orange */
+  --badge-bg:     #F2D8C2;   /* day-ahead badge background */
+  --border:       #EFE0CB;   /* divider lines */
+
+  --font-serif:   'Playfair Display', Georgia, serif;  /* used for headlines */
+  --font-mono:    'DM Mono', monospace;                /* used for labels */
+  --font-body:    'DM Sans', sans-serif;               /* used for body text */
+}
+
+
+/* ------------------------------------------------
+   BASE STYLES
+   Applies to the whole page
+------------------------------------------------ */
+* {
+  /* This makes sure padding does not add extra size to elements */
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--dark);
+
+  /* Warm cream background with a golden glow in the top right corner */
+  background-color: var(--cream);
+  background-image:
+    radial-gradient(ellipse 60% 55% at 80% 5%, rgba(220,160,80,0.22) 0%, transparent 70%);
+}
+
+/* Remove bullet points from lists */
+ul { list-style: none; }
+
+/* Remove underline from all links */
+a { text-decoration: none; color: inherit; }
+
+
+/* ------------------------------------------------
+   NAVIGATION BAR
+   The top bar with logo, links, and buttons
+------------------------------------------------ */
+nav {
+  display: flex;              /* puts logo, links, buttons side by side */
+  align-items: center;        /* vertically centers everything */
+  justify-content: space-between; /* pushes logo left, buttons right */
+  padding: 0 2.5rem;
+  height: 68px;
+}
+
+/* Logo: the image and text side by side */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;               /* small space between image and text */
+}
+
+.logo-image {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+}
+
+.logo-text {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--dark);
+}
+
+/* Navigation links in the middle */
+.nav-links {
+  display: flex;
+  gap: 2rem;                  /* space between each link */
+}
+
+.nav-links a {
+  font-size: 0.875rem;
+  color: var(--brown);
+}
+
+.nav-links a:hover {
+  color: var(--dark);         /* gets darker when you hover */
+}
+
+/* Right side buttons */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.sign-in {
+  font-size: 0.875rem;
+  color: var(--brown);
+}
+
+/* The orange "Get a forecast" pill button in the nav */
+.nav-button {
+  background: var(--orange);
+  color: white;
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 0.55rem 1.25rem;
+  border-radius: 999px;       /* 999px makes it a full pill shape */
+  transition: background 0.2s;
+}
+
+.nav-button:hover {
+  background: #A8501A;        /* slightly darker orange on hover */
+}
+
+
+/* ------------------------------------------------
+   HERO SECTION
+   Two columns: text on left, card on right
+------------------------------------------------ */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* two equal columns */
+  align-items: center;
+  gap: 3rem;
+  padding: 4rem 2.5rem 3rem;
+  max-width: 1200px;
+  margin: 0 auto;             /* centers the section on the page */
+}
+
+
+/* ------------------------------------------------
+   LEFT SIDE: Text content
+------------------------------------------------ */
+.hero-text {
+  display: flex;
+  flex-direction: column;     /* stacks items top to bottom */
+  gap: 1.5rem;
+}
+
+/* Small orange label above the headline */
+.label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--orange);
+}
+
+/* The big headline */
+h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(2.8rem, 5vw, 4rem); /* automatically adjusts with screen size */
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--dark);
+}
+
+/* The orange italic words inside the headline */
+.orange-italic {
+  color: var(--orange);
+  font-style: italic;
+}
+
+/* Body paragraph text */
+.description {
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--brown);
+  max-width: 42ch;            /* limits line width for easy reading */
+}
+
+/* Container that holds the two buttons side by side */
+.hero-buttons {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+  flex-wrap: wrap;            /* wraps to next line on small screens */
+}
+
+/* The dark "Get a forecast" pill button */
+.main-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: var(--dark);
+  color: white;
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 0.6rem 0.6rem 0.6rem 1.5rem;
+  border-radius: 999px;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.main-button:hover {
+  background: #2d1e10;
+  transform: translateY(-2px); /* lifts up slightly on hover */
+}
+
+/* The yellow circle that holds the arrow icon */
+.arrow-circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;          /* makes it a circle */
+  background: #F0C040;         /* golden yellow */
+  color: var(--dark);
+}
+
+/* The underline text link */
+.text-link {
+  font-size: 0.92rem;
+  color: var(--dark);
+  border-bottom: 1.5px solid var(--dark);
+  padding-bottom: 2px;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.text-link:hover {
+  color: var(--orange);
+  border-color: var(--orange);
+}
+
+
+/* ------------------------------------------------
+   RIGHT SIDE: The white forecast card
+------------------------------------------------ */
+.hero-card {
+  display: flex;
+  justify-content: flex-end;  /* pushes card to the right */
+}
+
+.card {
+  background: var(--white);
+  border-radius: 20px;
+  padding: 1.75rem;
+  width: 100%;
+  max-width: 420px;
+
+  /* Layered shadows give the floating card effect */
+  box-shadow:
+    0 2px 4px rgba(0,0,0,0.04),
+    0 8px 24px rgba(0,0,0,0.08),
+    0 24px 56px rgba(0,0,0,0.06);
+
+  /* Card fades and slides up when the page loads */
+  animation: slideUp 0.8s ease both;
+}
+
+/* The slide-up animation */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Top row of the card: location + badge */
+.card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* Location text with pink dot */
+.card-location {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.4rem;
+}
+
+/* The small pink circle beside the location */
+.pink-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #E0546A;
+  margin-top: 3px;
+  flex-shrink: 0;             /* stops it from shrinking */
+}
+
+.location-text {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  color: var(--brown);
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+/* The "DAY-AHEAD" badge */
+.day-ahead-badge {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  line-height: 1.2;
+  color: var(--orange);
+  background: var(--badge-bg);
+  border-radius: 6px;
+  padding: 0.35rem 0.6rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* The big 28.4 kWh number */
+.card-output {
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 0.2rem;
+}
+
+/* "28.4" — large dark serif number */
+.output-number {
+  font-family: var(--font-serif);
+  font-size: 3.2rem;
+  font-weight: 400;
+  color: var(--dark);
+  line-height: 1;
+}
+
+/* "kWh" — large orange italic serif */
+.output-unit {
+  font-family: var(--font-serif);
+  font-size: 3.2rem;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--orange);
+  line-height: 1;
+}
+
+/* Small confidence label under the number */
+.output-label {
+  font-size: 0.78rem;
+  color: var(--brown-light);
+  margin-bottom: 0.5rem;
+}
+
+
+/* ------------------------------------------------
+   THE GRAPH AREA
+------------------------------------------------ */
+.graph-area {
+  position: relative;         /* needed so peak-label can be positioned */
+  margin: 0.5rem -1.75rem 1rem; /* extends graph to card edges */
+}
+
+/* "peak · 12:30" text above the curve */
+.peak-label {
+  position: absolute;         /* floats above the graph */
+  top: 2px;
+  left: 55%;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--brown-light);
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+/* The SVG graph takes full width */
+.graph-area svg {
+  width: 100%;
+  height: 110px;
+  display: block;
+}
+
+
+/* ------------------------------------------------
+   CONTRIBUTING FACTORS (the bars)
+------------------------------------------------ */
+.factors {
+  border-top: 1px solid var(--border);
+  padding-top: 1rem;
+}
+
+/* "TOP CONTRIBUTING FACTORS" title */
+.factors-title {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  color: var(--brown-light);
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+/* Each row: name | bar | percentage */
+.factor-row {
+  display: grid;
+  grid-template-columns: 90px 1fr 36px; /* fixed widths for name and pct */
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.45rem;
+}
+
+.factor-name {
+  font-size: 0.8rem;
+  color: var(--dark);
+}
+
+/* The grey background behind the bar */
+.bar-track {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--border);
+  overflow: hidden;
+}
+
+/* The orange bar inside the track
+   --w is set in the HTML on each bar (e.g. style="--w: 78%")
+   This controls how long each individual bar is */
+.bar {
+  height: 100%;
+  width: var(--w, 50%);
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--orange) 0%, var(--orange-light) 100%);
+
+  /* Bar starts at 0 width and expands — JavaScript triggers this */
+  transition: width 0.9s ease;
+}
+
+.factor-pct {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--brown);
+  text-align: right;
+}
+
+
+/* ------------------------------------------------
+   STATS STRIP
+   The 4 numbers at the bottom of the page
+------------------------------------------------ */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 equal columns */
+  border-top: 1px solid var(--border);
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 2.5rem;
+  gap: 2rem;
+}
+
+.stat-number {
+  font-family: var(--font-serif);
+  font-size: 2.2rem;
+  font-weight: 400;
+  color: var(--dark);
+  line-height: 1;
+}
+
+/* The italic orange unit (kWh, %) beside the number */
+.stat-number em {
+  font-style: italic;
+  color: var(--orange);
+}
+
+/* The muted "/16" part */
+.muted {
+  color: var(--brown-light);
+}
+
+/* "SHAP" — fully orange italic serif */
+.orange-serif {
+  font-style: italic;
+  color: var(--orange);
+  font-size: 2.4rem;
+}
+
+.stat-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--brown-light);
+  margin-top: 0.35rem;
+}
+
+
+/* ------------------------------------------------
+   RESPONSIVE — smaller screens
+   When the screen is narrow, stack everything
+------------------------------------------------ */
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;  /* single column on small screens */
+    padding: 2.5rem 1.5rem;
+  }
+
+  .hero-card {
+    justify-content: center;
+  }
+
+  .stats {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns on small screens */
+    padding: 1.5rem;
+  }
+
+  .nav-links {
+    display: none; /* hide nav links on small screens */
+  }
+}

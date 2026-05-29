@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SolarProphet — System Configuration</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap">
+
+  <!-- Font Awesome icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <!-- Our CSS -->
+  <link rel="stylesheet" href="systemconfig.css" />
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ==============================
+       LEFT SIDEBAR
+  ============================== -->
+  <aside class="sidebar">
+
+    <div class="sidebar-logo">
+      <img src="favicon.svg" alt="SolarProphet" class="sidebar-logo-img">
+      <span class="sidebar-logo-text">SolarProphet</span>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="map.html" class="nav-item">
+        <i class="fa-regular fa-map"></i>
+        <span>Map</span>
+      </a>
+      <a href="predictions.html" class="nav-item">
+        <i class="fa-regular fa-chart-bar"></i>
+        <span>Predictions</span>
+      </a>
+      <a href="#" class="nav-item">
+        <i class="fa-regular fa-clone"></i>
+        <span>Compare areas</span>
+      </a>
+      <!-- System config is the active page -->
+      <a href="systemconfig.html" class="nav-item active">
+        <i class="fa-regular fa-square"></i>
+        <span>System config</span>
+      </a>
+      <a href="explainability.html" class="nav-item">
+        <i class="fa-solid fa-globe"></i>
+        <span>Explainability</span>
+      </a>
+      <a href="#" class="nav-item">
+        <i class="fa-solid fa-arrow-down-to-bracket"></i>
+        <span>Reports</span>
+      </a>
+      <a href="#" class="nav-item">
+        <i class="fa-regular fa-bookmark"></i>
+        <span>Saved</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <div class="user-profile">
+        <div class="user-avatar">PA</div>
+        <div class="user-info">
+          <p class="user-name">Prince Asiedu</p>
+          <p class="user-role">Installer</p>
+        </div>
+      </div>
+    </div>
+
+  </aside>
+
+
+  <!-- ==============================
+       MAIN CONTENT
+  ============================== -->
+  <main class="main">
+
+    <!-- Top bar -->
+    <div class="top-bar">
+      <div class="top-bar-left">
+        <h1 class="page-title">System Configuration</h1>
+        <p class="page-subtitle">DEFINE YOUR INSTALLATION · FORECAST UPDATES IN REAL-TIME</p>
+      </div>
+      <div class="top-bar-right">
+        <button class="outline-button">Reset to defaults</button>
+        <button class="filled-button">Save configuration</button>
+      </div>
+    </div>
+
+    <!-- Scrollable content -->
+    <div class="content">
+
+      <!-- Two columns: left = config, right = live preview -->
+      <div class="two-col">
+
+        <!-- ==============================
+             LEFT COLUMN: Configuration
+        ============================== -->
+        <div class="config-col">
+
+          <!-- Panel type card -->
+          <div class="card">
+            <h2 class="card-title">Panel type</h2>
+
+            <div class="panel-options">
+
+              <!-- Monocrystalline — selected by default -->
+              <div class="panel-option selected" onclick="selectPanel(this)">
+                <div class="panel-check">
+                  <i class="fa-solid fa-check"></i>
+                </div>
+                <p class="panel-name">Monocrystalline</p>
+                <p class="panel-eff">~22% efficiency</p>
+              </div>
+
+              <div class="panel-option" onclick="selectPanel(this)">
+                <p class="panel-name">Polycrystalline</p>
+                <p class="panel-eff">~17% efficiency</p>
+              </div>
+
+              <div class="panel-option" onclick="selectPanel(this)">
+                <p class="panel-name">Thin film</p>
+                <p class="panel-eff">~13% efficiency</p>
+              </div>
+
+            </div>
+          </div>
+
+
+          <!-- System capacity card -->
+          <div class="card">
+            <div class="capacity-header">
+              <h2 class="card-title">System capacity</h2>
+              <span class="capacity-value" id="capacityValue">5.0 <em>kW</em></span>
+            </div>
+
+            <!--
+              Range slider — dragging this changes the
+              capacity value shown above and updates
+              the live preview on the right.
+            -->
+            <input
+              type="range"
+              min="1"
+              max="15"
+              value="5"
+              step="0.1"
+              class="capacity-slider"
+              id="capacitySlider"
+              oninput="updateCapacity(this.value)"
+            >
+
+            <!-- Min / mid / max labels under the slider -->
+            <div class="slider-labels">
+              <span>1 kW</span>
+              <span>5 kW</span>
+              <span>15 kW</span>
+            </div>
+          </div>
+
+
+          <!-- Tilt angle + Orientation side by side -->
+          <div class="two-small">
+
+            <!-- Tilt angle card -->
+            <div class="card">
+              <h2 class="card-title">Tilt angle</h2>
+
+              <div class="tilt-row">
+                <!-- Visual diagram of the tilt angle -->
+                <div class="tilt-diagram">
+                  <svg viewBox="0 0 80 60" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Ground line -->
+                    <line x1="5" y1="50" x2="75" y2="50" stroke="#EFE0CB" stroke-width="2"/>
+                    <!-- Panel line at 15 degrees -->
+                    <line x1="15" y1="50" x2="55" y2="15"
+                      stroke="#C45E20" stroke-width="2.5"
+                      stroke-linecap="round"
+                      id="tiltLine"
+                    />
+                    <!-- Angle arc -->
+                    <path d="M 25,50 A 12,12 0 0,1 36,42"
+                      fill="none" stroke="#9C7B5E" stroke-width="1.5"/>
+                    <!-- Angle label -->
+                    <text x="30" y="52" font-family="DM Mono,monospace"
+                      font-size="8" fill="#9C7B5E" id="tiltLabel">15°</text>
+                  </svg>
+                </div>
+
+                <div class="tilt-controls">
+                  <!-- Number input for tilt angle -->
+                  <input
+                    type="number"
+                    min="0"
+                    max="90"
+                    value="15"
+                    class="tilt-input"
+                    id="tiltInput"
+                    oninput="updateTilt(this.value)"
+                  >
+                  <p class="tilt-note">Optimal<br>for ~7°N</p>
+                </div>
+              </div>
+            </div>
+
+
+            <!-- Orientation card -->
+            <div class="card">
+              <h2 class="card-title">Orientation</h2>
+
+              <div class="orientation-row">
+                <!-- Compass diagram -->
+                <div class="compass">
+                  <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Compass circle -->
+                    <circle cx="40" cy="40" r="30" fill="none" stroke="#EFE0CB" stroke-width="1.5"/>
+                    <!-- N S E W labels -->
+                    <text x="40" y="16" text-anchor="middle" font-family="DM Mono,monospace" font-size="9" fill="#9C7B5E">N</text>
+                    <text x="40" y="68" text-anchor="middle" font-family="DM Mono,monospace" font-size="9" fill="#9C7B5E">S</text>
+                    <text x="68" y="44" text-anchor="middle" font-family="DM Mono,monospace" font-size="9" fill="#9C7B5E">E</text>
+                    <text x="12" y="44" text-anchor="middle" font-family="DM Mono,monospace" font-size="9" fill="#9C7B5E">W</text>
+                    <!-- Compass needle pointing south -->
+                    <line x1="40" y1="40" x2="40" y2="65"
+                      stroke="#C45E20" stroke-width="2.5"
+                      stroke-linecap="round"
+                      id="compassNeedle"
+                    />
+                    <!-- Center dot -->
+                    <circle cx="40" cy="40" r="3" fill="#C45E20"/>
+                    <!-- Star symbol at bottom -->
+                    <text x="40" y="78" text-anchor="middle" font-size="8" fill="#9C7B5E">✦</text>
+                  </svg>
+                </div>
+
+                <div class="orientation-controls">
+                  <!-- Dropdown to select direction -->
+                  <select class="orientation-select" id="orientationSelect" onchange="updateOrientation(this.value)">
+                    <option value="south">South</option>
+                    <option value="north">North</option>
+                    <option value="east">East</option>
+                    <option value="west">West</option>
+                  </select>
+                  <p class="orientation-note">Best for<br>southern<br>hemisphere</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+
+        <!-- ==============================
+             RIGHT COLUMN: Live Preview
+        ============================== -->
+        <div class="preview-col">
+
+          <!-- Live preview label -->
+          <p class="live-label">LIVE PREVIEW · UPDATES AS YOU TYPE</p>
+
+          <!-- Preview card -->
+          <div class="preview-card">
+
+            <!-- Location header -->
+            <div class="preview-header">
+              <div class="preview-location">
+                <span class="pink-dot"></span>
+                <span class="preview-location-text">EJISU, ASHANTI</span>
+              </div>
+              <span class="day-ahead-badge">DAY-AHEAD</span>
+            </div>
+
+            <!-- Big output number -->
+            <div class="preview-output">
+              <span class="preview-number" id="previewNumber">28.4</span>
+              <span class="preview-unit">kWh</span>
+            </div>
+            <p class="preview-sub" id="previewSub">expected · 5 kW system at 15° tilt</p>
+
+            <!-- vs default config indicator -->
+            <div class="vs-default">
+              <i class="fa-solid fa-arrow-trend-up"></i>
+              <span id="vsDiff">+3.2 kWh vs. default config</span>
+            </div>
+
+            <!-- Comparison bars -->
+            <div class="comparison">
+
+              <div class="comparison-row">
+                <span class="comparison-label">Your config</span>
+                <span class="comparison-value" id="yourConfigVal">28.4 kWh</span>
+              </div>
+              <div class="bar-track">
+                <div class="bar bar--orange" style="--w: 92%"></div>
+              </div>
+
+              <div class="comparison-row" style="margin-top: 0.75rem">
+                <span class="comparison-label">Default (poly · 0°)</span>
+                <span class="comparison-value">25.2 kWh</span>
+              </div>
+              <div class="bar-track">
+                <div class="bar bar--light" style="--w: 81%"></div>
+              </div>
+
+              <div class="comparison-row" style="margin-top: 0.75rem">
+                <span class="comparison-label">Best possible (mono · optimal tilt)</span>
+                <span class="comparison-value">29.1 kWh</span>
+              </div>
+              <div class="bar-track">
+                <div class="bar bar--grey" style="--w: 95%"></div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Suggestion card -->
+          <div class="suggestion-card">
+            <div class="suggestion-icon">💡</div>
+            <div>
+              <p class="suggestion-title">Suggestion</p>
+              <p class="suggestion-text" id="suggestionText">
+                Increasing tilt to 7° matches Ejisu's latitude and
+                could yield an extra 0.3 kWh/day. Try the slider →
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<script src="systemconfig.js"></script>
+
+</body>
+</html>

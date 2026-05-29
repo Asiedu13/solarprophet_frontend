@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SolarProphet — Predictions</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap">
+
+  <!-- Font Awesome icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <!-- Google Charts library -->
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+  <!-- Our CSS -->
+  <link rel="stylesheet" href="predictions.css" />
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ==============================
+       LEFT SIDEBAR
+  ============================== -->
+  <aside class="sidebar">
+
+    <div class="sidebar-logo">
+      <img src="favicon.svg" alt="SolarProphet" class="sidebar-logo-img">
+      <span class="sidebar-logo-text">SolarProphet</span>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="map.html" class="nav-item">
+        <i class="fa-regular fa-map"></i>
+        <span>Map</span>
+      </a>
+      <!-- Predictions is the active page -->
+      <a href="predictions.html" class="nav-item active">
+        <i class="fa-regular fa-chart-bar"></i>
+        <span>Predictions</span>
+      </a>
+      <a href="#" class="nav-item">
+        <i class="fa-regular fa-clone"></i>
+        <span>Compare areas</span>
+      </a>
+      <a href="#" class="nav-item">
+        <i class="fa-regular fa-square"></i>
+        <span>System config</span>
+      </a>
+      <a href="#" class="nav-item">
+        <i class="fa-solid fa-globe"></i>
+        <span>Explainability</span>
+      </a>
+      <a href="#" class="nav-item">
+        <i class="fa-solid fa-arrow-down-to-bracket"></i>
+        <span>Reports</span>
+      </a>
+      <a href="#" class="nav-item">
+        <i class="fa-regular fa-bookmark"></i>
+        <span>Saved</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <div class="user-profile">
+        <div class="user-avatar">PA</div>
+        <div class="user-info">
+          <p class="user-name">Prince Asiedu</p>
+          <p class="user-role">Researcher</p>
+        </div>
+      </div>
+    </div>
+
+  </aside>
+
+
+  <!-- ==============================
+       MAIN CONTENT
+  ============================== -->
+  <main class="main">
+
+    <!-- Top bar -->
+    <div class="top-bar">
+      <div class="top-bar-left">
+        <!-- Breadcrumb -->
+        <p class="breadcrumb">
+          <a href="map.html">Map</a>
+          <span>·</span>
+          <a href="predictions.html">Predictions</a>
+          <span>·</span>
+          <span>Ejisu, Ashanti</span>
+        </p>
+        <h1 class="page-title">Forecast for Ejisu, Ashanti</h1>
+      </div>
+      <div class="top-bar-right">
+        <button class="save-button">Save</button>
+        <button class="export-button">Export PDF</button>
+      </div>
+    </div>
+
+    <!-- Scrollable content -->
+    <div class="content">
+
+      <!-- 4 Stat cards -->
+      <div class="stat-cards">
+
+        <div class="stat-card">
+          <p class="stat-card-label">DAILY</p>
+          <div class="stat-card-value">
+            <span class="stat-number">28.4</span>
+            <span class="stat-unit">kWh</span>
+          </div>
+          <p class="stat-card-sub">±1.1 kWh</p>
+        </div>
+
+        <div class="stat-card">
+          <p class="stat-card-label">WEEKLY</p>
+          <div class="stat-card-value">
+            <span class="stat-number">194</span>
+            <span class="stat-unit">kWh</span>
+          </div>
+          <p class="stat-card-sub">±8 kWh</p>
+        </div>
+
+        <div class="stat-card">
+          <p class="stat-card-label">MONTHLY</p>
+          <div class="stat-card-value">
+            <span class="stat-number">832</span>
+            <span class="stat-unit">kWh</span>
+          </div>
+          <p class="stat-card-sub">May 2026</p>
+        </div>
+
+        <div class="stat-card stat-card--highlight">
+          <p class="stat-card-label">ANNUAL SAVINGS</p>
+          <div class="stat-card-value">
+            <span class="stat-number stat-number--orange">GHS 5,470</span>
+          </div>
+          <p class="stat-card-sub">9,847 kWh × ECG tariff</p>
+        </div>
+
+      </div>
+
+
+      <!-- Forecast chart card -->
+      <div class="chart-card">
+
+        <div class="chart-header">
+          <div>
+            <h2 class="chart-title">Forecast curve</h2>
+            <p class="chart-subtitle">Expected output with 95% confidence band</p>
+          </div>
+          <!-- Time range tabs -->
+          <div class="chart-tabs">
+            <button class="chart-tab" onclick="setChartTab(this, '24h')">24h</button>
+            <button class="chart-tab active" onclick="setChartTab(this, '7days')">7 days</button>
+            <button class="chart-tab" onclick="setChartTab(this, '30days')">30 days</button>
+            <button class="chart-tab" onclick="setChartTab(this, '1year')">1 year</button>
+          </div>
+        </div>
+
+        <!-- Google Charts will draw the chart inside this div -->
+        <div id="forecast-chart"></div>
+
+        <!-- Legend -->
+        <div class="chart-legend">
+          <div class="legend-item">
+            <div class="legend-line legend-line--solid"></div>
+            <span>Predicted</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-line legend-line--dashed"></div>
+            <span>Past actual</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-box"></div>
+            <span>95% confidence</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<script src="predictions.js"></script>
+
+</body>
+</html>

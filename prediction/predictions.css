@@ -1,0 +1,436 @@
+/* ================================================
+   SOLARPROPHET — predictions.css
+================================================ */
+
+/* Same colors as all other pages */
+:root {
+  --cream:       #F7EEE2;
+  --cream-light: #FBF5ED;
+  --white:       #FFFFFF;
+  --dark:        #1C120A;
+  --brown:       #5A3E28;
+  --brown-light: #9C7B5E;
+  --orange:      #C45E20;
+  --red-dark:    #B84A20;
+  --border:      #EFE0CB;
+  --badge-bg:    #F2D8C2;
+
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-mono:  'DM Mono', monospace;
+  --font-body:  'DM Sans', sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font-body);
+  color: var(--dark);
+  background: var(--cream);
+  height: 100vh;
+  overflow: hidden;
+}
+
+a { text-decoration: none; color: inherit; }
+button { cursor: pointer; border: none; font-family: var(--font-body); }
+
+/* Full page layout */
+.page {
+  display: flex;
+  height: 100vh;
+}
+
+
+/* ==============================
+   SIDEBAR — same as map page
+============================== */
+.sidebar {
+  width: 260px;
+  background: var(--white);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 1rem;
+  flex-shrink: 0;
+  overflow-y: auto;
+}
+
+.sidebar-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  padding: 0 0.5rem;
+}
+
+.sidebar-logo-img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+}
+
+.sidebar-logo-text {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--dark);
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  flex: 1;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0.75rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color: var(--brown);
+  transition: background 0.15s, color 0.15s;
+}
+
+.nav-item:hover { background: var(--cream); color: var(--dark); }
+
+.nav-item.active {
+  background: var(--badge-bg);
+  color: var(--orange);
+  font-weight: 500;
+}
+
+.nav-item i { width: 18px; text-align: center; font-size: 0.95rem; }
+
+.sidebar-bottom {
+  border-top: 1px solid var(--border);
+  padding-top: 1rem;
+  margin-top: 1rem;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.user-profile:hover { background: var(--cream); }
+
+.user-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--orange);
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.user-name { font-size: 0.85rem; font-weight: 500; color: var(--dark); }
+.user-role { font-size: 0.75rem; color: var(--brown-light); }
+
+
+/* ==============================
+   MAIN CONTENT
+============================== */
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Top bar */
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--white);
+  flex-shrink: 0;
+}
+
+/* Breadcrumb: Map · Predictions · Ejisu, Ashanti */
+.breadcrumb {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--brown-light);
+  letter-spacing: 0.04em;
+  margin-bottom: 0.3rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.breadcrumb a {
+  color: var(--orange);
+}
+
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.page-title {
+  font-family: var(--font-serif);
+  font-size: 1.8rem;
+  font-weight: 400;
+  color: var(--dark);
+}
+
+.top-bar-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* "Save" button — outlined style */
+.save-button {
+  background: var(--white);
+  color: var(--dark);
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 0.5rem 1.25rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  transition: background 0.2s;
+}
+
+.save-button:hover { background: var(--cream); }
+
+/* "Export PDF" button — filled orange */
+.export-button {
+  background: var(--orange);
+  color: white;
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 0.5rem 1.25rem;
+  border-radius: 999px;
+  transition: background 0.2s;
+}
+
+.export-button:hover { background: #A8501A; }
+
+
+/* ==============================
+   SCROLLABLE CONTENT
+============================== */
+.content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+
+/* ==============================
+   4 STAT CARDS
+============================== */
+.stat-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.stat-card {
+  background: var(--white);
+  border-radius: 14px;
+  padding: 1.25rem;
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+/* The annual savings card has a cream background */
+.stat-card--highlight {
+  background: var(--cream-light);
+}
+
+/* Small label at the top: "DAILY", "WEEKLY" etc */
+.stat-card-label {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  color: var(--brown-light);
+}
+
+/* Number and unit on same row */
+.stat-card-value {
+  display: flex;
+  align-items: baseline;
+  gap: 0.15rem;
+}
+
+/* The big number */
+.stat-number {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  font-weight: 400;
+  color: var(--dark);
+  line-height: 1;
+}
+
+/* "kWh" in orange italic */
+.stat-unit {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  font-style: italic;
+  color: var(--orange);
+  line-height: 1;
+}
+
+/* "GHS 5,470" is slightly bigger */
+.stat-number--large {
+  font-family: var(--font-serif);
+  font-size: 1.8rem;
+  font-weight: 400;
+  color: var(--orange);
+  font-style: italic;
+}
+
+/* Small sub-text: "±1.1 kWh", "May 2026" */
+.stat-card-sub {
+  font-size: 0.78rem;
+  color: var(--brown-light);
+}
+
+
+/* ==============================
+   FORECAST CHART CARD
+============================== */
+.chart-card {
+  background: var(--white);
+  border-radius: 14px;
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+}
+
+/* Chart header: title + tabs */
+.chart-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.chart-title {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: var(--dark);
+}
+
+.chart-subtitle {
+  font-size: 0.82rem;
+  color: var(--brown-light);
+  margin-top: 0.2rem;
+}
+
+/* 24h / 7 days / 30 days / 1 year tabs */
+.chart-tabs {
+  display: flex;
+  background: var(--cream);
+  border-radius: 999px;
+  padding: 3px;
+  gap: 2px;
+}
+
+.chart-tab {
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  color: var(--brown);
+  background: transparent;
+  transition: background 0.2s, color 0.2s;
+  white-space: nowrap;
+}
+
+.chart-tab.active {
+  background: var(--white);
+  color: var(--dark);
+  font-weight: 500;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+/* The SVG chart area */
+.chart-area {
+  width: 100%;
+}
+
+.chart-area svg {
+  width: 100%;
+  height: 260px;
+  display: block;
+}
+
+/* Day labels under the chart */
+.chart-days {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0.5rem 0;
+}
+
+.chart-days span {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--brown-light);
+}
+
+/* Legend at the bottom */
+.chart-legend {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--brown);
+}
+
+/* Solid orange line for "Predicted" */
+.legend-line--solid {
+  width: 28px;
+  height: 2.5px;
+  background: var(--red-dark);
+  border-radius: 2px;
+}
+
+/* Dashed line for "Past actual" */
+.legend-line--dashed {
+  width: 28px;
+  height: 2px;
+  background: repeating-linear-gradient(
+    90deg,
+    #8B6B4A 0px,
+    #8B6B4A 6px,
+    transparent 6px,
+    transparent 10px
+  );
+}
+
+/* Cream box for "95% confidence" */
+.legend-box {
+  width: 18px;
+  height: 14px;
+  background: #F0D4A0;
+  border-radius: 3px;
+  opacity: 0.8;
+}

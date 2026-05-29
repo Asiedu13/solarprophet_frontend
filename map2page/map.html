@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SolarProphet — Map</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
+  <!-- Our CSS -->
+  <link rel="stylesheet" href="map.css" />
+</head>
+
+<body>
+<div class="page">
+
+  <!-- ==============================
+       LEFT SIDEBAR
+  ============================== -->
+  <aside class="sidebar">
+
+    <div class="sidebar-logo">
+      <img src="favicon.svg" class="sidebar-logo-img">
+      <span class="sidebar-logo-text">SolarProphet</span>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="map.html" class="nav-item active">
+        <i class="fa-regular fa-map"></i>
+        <span>Map</span>
+      </a>
+      <a href="predictions.html" class="nav-item">
+        <i class="fa-regular fa-chart-bar"></i>
+        <span>Predictions</span>
+      </a>
+      <a href="#" class="nav-item">
+        <i class="fa-regular fa-clone"></i>
+        <span>Compare areas</span>
+      </a>
+      <a href="systemconfig.html" class="nav-item">
+        <i class="fa-regular fa-square"></i>
+        <span>System config</span>
+      </a>
+      <a href="explainability2.html" class="nav-item">
+        <i class="fa-solid fa-globe"></i>
+        <span>Explainability</span>
+      </a>
+      <a href="#" class="nav-item">
+        <i class="fa-solid fa-arrow-down-to-bracket"></i>
+        <span>Reports</span>
+      </a>
+      <a href="#" class="nav-item">
+        <i class="fa-regular fa-bookmark"></i>
+        <span>Saved</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <p class="account-label">ACCOUNT</p>
+      <a href="#" class="nav-item">
+        <i class="fa-regular fa-heart"></i>
+        <span>Premium</span>
+        <span class="apply-badge">Apply</span>
+      </a>
+      <a href="#" class="nav-item">
+        <i class="fa-solid fa-gear"></i>
+        <span>Settings</span>
+      </a>
+      <div class="user-profile">
+        <div class="user-avatar">PA</div>
+        <div class="user-info">
+          <p class="user-name">Prince Asiedu</p>
+          <p class="user-role">Researcher</p>
+        </div>
+      </div>
+    </div>
+
+  </aside>
+
+
+  <!-- ==============================
+       MAIN CONTENT
+  ============================== -->
+  <main class="main">
+
+    <!-- TOP BAR -->
+    <div class="top-bar">
+      <div>
+        <h1 class="page-title">Map</h1>
+        <p class="page-subtitle">PICK A LOCATION · GET AN EXPLAINABLE SOLAR FORECAST</p>
+      </div>
+      <div class="top-bar-right">
+        <div class="search-box">
+          <i class="fa-solid fa-magnifying-glass search-icon"></i>
+          <input type="text" id="searchInput" class="search-input" placeholder="Search address or region...">
+        </div>
+        <button class="pin-button" id="pinButton">Pin location</button>
+      </div>
+    </div>
+
+    <!-- MAP + RIGHT PANEL -->
+    <div class="map-section">
+
+      <!-- Leaflet map fills this div -->
+      <div class="map-container">
+        <div id="map"></div>
+      </div>
+
+      <!-- RIGHT PANEL -->
+      <div class="right-panel">
+
+        <div class="panel-header">
+          <div>
+            <p class="selected-label">SELECTED LOCATION</p>
+            <h2 class="location-name" id="locationName">Ejisu, Ashanti</h2>
+            <p class="location-coords" id="locationCoords">6.7421°N · 1.3636°W</p>
+          </div>
+          <button class="bookmark-btn">
+            <i class="fa-regular fa-bookmark"></i>
+          </button>
+        </div>
+
+        <!-- Tabs -->
+        <div class="time-tabs">
+          <button class="tab active" onclick="setTab(this)">Day</button>
+          <button class="tab" onclick="setTab(this)">Week</button>
+          <button class="tab" onclick="setTab(this)">Month</button>
+          <button class="tab" onclick="setTab(this)">Year</button>
+        </div>
+
+        <!-- Expected output card -->
+        <div class="output-card">
+          <p class="output-card-label">EXPECTED OUTPUT · DAY-AHEAD</p>
+          <div class="output-number-row">
+            <span class="big-number">28.4</span>
+            <span class="big-unit">kWh</span>
+          </div>
+          <p class="output-sub">±1.1 kWh confidence · 4% tolerance</p>
+        </div>
+
+        <!-- Hourly profile graph -->
+        <p class="hourly-label">HOURLY PROFILE</p>
+        <div class="hourly-graph">
+          <svg viewBox="0 0 400 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="graphGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%"   stop-color="#D96B2A" stop-opacity="0.4"/>
+                <stop offset="40%"  stop-color="#E8A060" stop-opacity="0.2"/>
+                <stop offset="100%" stop-color="#F7EEE2" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <path
+              d="M0,100 C30,100 60,95 90,78 C120,60 145,35 175,15 C190,6 200,2 210,2 C220,2 230,6 245,15 C275,35 300,60 330,78 C360,95 380,100 400,100 Z"
+              fill="url(#graphGrad)"
+            />
+            <path
+              d="M0,100 C30,100 60,95 90,78 C120,60 145,35 175,15 C190,6 200,2 210,2 C220,2 230,6 245,15 C275,35 300,60 330,78 C360,95 380,100 400,100"
+              fill="none"
+              stroke="#C45E20"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+          </svg>
+          <div class="graph-times">
+            <span>06:00</span>
+            <span>09:00</span>
+            <span>12:00</span>
+            <span>15:00</span>
+            <span>18:00</span>
+          </div>
+        </div>
+
+        <!-- Why is this high card -->
+        <div class="why-card">
+          <p class="why-text">
+            <span class="why-title">Why is this high?</span>
+            Clear skies and low cloud cover are forecast through the day,
+            with peak irradiance at 12:30. Mild temperature keeps panel efficiency strong.
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<!-- Service worker for offline support -->
+<script src="register-sw.js"></script>
+
+<!-- Our JS -->
+<script src="map.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,406 @@
+/* ================================================
+   SOLARPROPHET — explainability.css
+================================================ */
+
+:root {
+  --cream:       #F7EEE2;
+  --cream-light: #FBF5ED;
+  --white:       #FFFFFF;
+  --dark:        #1C120A;
+  --brown:       #5A3E28;
+  --brown-light: #9C7B5E;
+  --orange:      #C45E20;
+  --border:      #EFE0CB;
+  --badge-bg:    #F2D8C2;
+
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-mono:  'DM Mono', monospace;
+  --font-body:  'DM Sans', sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font-body);
+  color: var(--dark);
+  background: var(--cream);
+  height: 100vh;
+  overflow: hidden;
+}
+
+a { text-decoration: none; color: inherit; }
+button { cursor: pointer; border: none; font-family: var(--font-body); }
+
+.page {
+  display: flex;
+  height: 100vh;
+}
+
+
+/* ==============================
+   SIDEBAR
+============================== */
+.sidebar {
+  width: 260px;
+  background: var(--white);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 1rem;
+  flex-shrink: 0;
+  overflow-y: auto;
+}
+
+.sidebar-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  padding: 0 0.5rem;
+}
+
+.sidebar-logo-img { width: 22px; height: 22px; object-fit: contain; }
+
+.sidebar-logo-text {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--dark);
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  flex: 1;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0.75rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color: var(--brown);
+  transition: background 0.15s, color 0.15s;
+}
+
+.nav-item:hover { background: var(--cream); color: var(--dark); }
+
+.nav-item.active {
+  background: var(--badge-bg);
+  color: var(--orange);
+  font-weight: 500;
+}
+
+.nav-item i { width: 18px; text-align: center; font-size: 0.95rem; }
+
+.sidebar-bottom {
+  border-top: 1px solid var(--border);
+  padding-top: 1rem;
+  margin-top: 1rem;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.user-profile:hover { background: var(--cream); }
+
+.user-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--orange);
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.user-name { font-size: 0.85rem; font-weight: 500; color: var(--dark); }
+.user-role { font-size: 0.75rem; color: var(--brown-light); }
+
+
+/* ==============================
+   MAIN CONTENT
+============================== */
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Top bar */
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--white);
+  flex-shrink: 0;
+}
+
+.page-title {
+  font-family: var(--font-serif);
+  font-size: 1.8rem;
+  font-weight: 400;
+  color: var(--dark);
+}
+
+.page-subtitle {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  color: var(--brown-light);
+  margin-top: 0.25rem;
+}
+
+.top-bar-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* Outlined button */
+.outline-button {
+  background: var(--white);
+  color: var(--dark);
+  font-size: 0.875rem;
+  font-weight: 400;
+  padding: 0.5rem 1.25rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  transition: background 0.2s;
+}
+
+.outline-button:hover { background: var(--cream); }
+
+/* Filled orange button */
+.filled-button {
+  background: var(--orange);
+  color: white;
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 0.5rem 1.25rem;
+  border-radius: 999px;
+  transition: background 0.2s;
+}
+
+.filled-button:hover { background: #A8501A; }
+
+
+/* ==============================
+   SCROLLABLE CONTENT
+============================== */
+.content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Top row: two cards side by side */
+.top-row {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 1rem;
+  align-items: start;
+}
+
+/* Shared card style */
+.card {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+}
+
+
+/* ==============================
+   SHAP WATERFALL CARD
+============================== */
+.shap-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  gap: 1rem;
+}
+
+.card-title {
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: var(--dark);
+}
+
+.card-subtitle {
+  font-size: 0.78rem;
+  color: var(--brown-light);
+  margin-top: 0.25rem;
+  line-height: 1.4;
+}
+
+/* Local / Global toggle */
+.toggle-tabs {
+  display: flex;
+  background: var(--cream);
+  border-radius: 999px;
+  padding: 3px;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.toggle-tab {
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  color: var(--brown);
+  background: transparent;
+  transition: background 0.2s, color 0.2s;
+}
+
+.toggle-tab.active {
+  background: var(--white);
+  color: var(--dark);
+  font-weight: 500;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+/* SVG chart fills full width */
+.shap-chart svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+
+/* ==============================
+   FEATURE CONTRIBUTIONS CARD
+============================== */
+.contributions-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Each feature row */
+.feature {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+/* Name and percentage on same row */
+.feature-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.feature-name {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--dark);
+}
+
+/* Positive percentage — orange */
+.feature-pct--positive {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--orange);
+}
+
+/* Negative percentage — blue */
+.feature-pct--negative {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #5B8DB8;
+}
+
+/* Grey background track behind the bar */
+.feature-bar-track {
+  height: 7px;
+  border-radius: 4px;
+  background: var(--border);
+  overflow: hidden;
+}
+
+/*
+  The colored bar inside the track.
+  --w is set inline in the HTML to control width.
+  CSS transition animates it when JS triggers it.
+*/
+.feature-bar {
+  height: 100%;
+  width: var(--w, 50%);
+  border-radius: 4px;
+  transition: width 0.9s ease;
+}
+
+/* Orange gradient bar for positive features */
+.feature-bar--orange {
+  background: linear-gradient(90deg, #C45E20 0%, #F0A830 100%);
+}
+
+/* Blue bar for negative features */
+.feature-bar--blue {
+  background: #5B8DB8;
+}
+
+/* Small detail text under each bar */
+.feature-detail {
+  font-size: 0.75rem;
+  color: var(--brown-light);
+}
+
+
+/* ==============================
+   BOTTOM ROW: 3 SMALL CARDS
+============================== */
+.bottom-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.small-card {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+}
+
+/* Colored circle icon on each small card */
+.small-card-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.small-card-icon--pink  { background: #F2C4C4; }
+.small-card-icon--blue  { background: #C4D8F2; }
+.small-card-icon--green { background: #C4F2D8; }
+
+.small-card-label {
+  font-size: 0.85rem;
+  color: var(--brown);
+  font-weight: 500;
+}

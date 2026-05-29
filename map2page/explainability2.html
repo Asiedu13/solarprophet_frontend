@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SolarProphet — Explainability</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <!-- Our CSS -->
+  <link rel="stylesheet" href="explainability2.css" />
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ==============================
+       LEFT SIDEBAR
+  ============================== -->
+  <aside class="sidebar">
+
+    <div class="sidebar-logo">
+      <img src="favicon.svg" alt="SolarProphet" class="sidebar-logo-img">
+      <span class="sidebar-logo-text">SolarProphet</span>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="map.html" class="nav-item">
+        <i class="fa-regular fa-map"></i>
+        <span>Map</span>
+      </a>
+      <a href="predictions.html" class="nav-item">
+        <i class="fa-regular fa-chart-bar"></i>
+        <span>Predictions</span>
+      </a>
+      <a href="#" class="nav-item">
+        <i class="fa-regular fa-clone"></i>
+        <span>Compare areas</span>
+      </a>
+      <a href="systemconfig.html" class="nav-item">
+        <i class="fa-regular fa-square"></i>
+        <span>System config</span>
+      </a>
+      <!-- Explainability is the active page -->
+      <a href="explainability2.html" class="nav-item active">
+        <i class="fa-solid fa-globe"></i>
+        <span>Explainability</span>
+      </a>
+      <a href="#" class="nav-item">
+        <i class="fa-solid fa-arrow-down-to-bracket"></i>
+        <span>Reports</span>
+      </a>
+      <a href="#" class="nav-item">
+        <i class="fa-regular fa-bookmark"></i>
+        <span>Saved</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <div class="user-profile">
+        <div class="user-avatar">PA</div>
+        <div class="user-info">
+          <p class="user-name">Prince Asiedu</p>
+          <p class="user-role">Researcher</p>
+        </div>
+      </div>
+    </div>
+
+  </aside>
+
+
+  <!-- ==============================
+       MAIN CONTENT
+  ============================== -->
+  <main class="main">
+
+    <!-- Top bar -->
+    <div class="top-bar">
+      <div class="top-bar-left">
+        <h1 class="page-title">Why this prediction?</h1>
+        <p class="page-subtitle">SHAP FEATURE IMPORTANCE · EJISU, ASHANTI · 28.4 KWH FORECAST</p>
+      </div>
+      <div class="top-bar-right">
+        <button class="outline-button">Compare to baseline</button>
+        <button class="filled-button">Export explanation</button>
+      </div>
+    </div>
+
+    <!-- Scrollable content -->
+    <div class="content">
+
+      <!-- ==============================
+           BIG SUMMARY CARD
+           The large white card with the
+           headline and body text
+      ============================== -->
+      <div class="summary-card">
+
+        <!-- Left side: big headline -->
+        <div class="summary-left">
+
+          <!-- Small orange label at top -->
+          <p class="summary-label">
+            <span class="label-dot">◎</span>
+            PLAIN-LANGUAGE SUMMARY
+          </p>
+
+          <!--
+            The big headline.
+            "22% above" and "clear skies." are
+            wrapped in a span to make them
+            orange and italic.
+          -->
+          <h2 class="summary-headline">
+            The forecast is
+            <span class="orange-italic">22% above</span>
+            the regional average — driven mostly by
+            <span class="orange-italic">clear skies.</span>
+          </h2>
+
+        </div>
+
+        <!-- Right side: body text -->
+        <div class="summary-right">
+
+          <p class="summary-body">
+            Cloud cover is the single biggest factor pushing this
+            prediction up — contributing <strong>+38%</strong> to the final
+            value. Strong direct irradiance and mild temperatures
+            support the forecast further. Slightly elevated humidity
+            is the only meaningful drag.
+          </p>
+
+          <p class="summary-body">
+            If conditions hold, this site will outperform Accra by ~24%
+            and match Tamale within tolerance. Confidence is high —
+            the model has 11 years of validated NASA POWER data for
+            this exact coordinate.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- ==============================
+           BOTTOM ROW
+           SHAP waterfall + Feature contributions
+           These are previews that link to the
+           full explainability page
+      ============================== -->
+      <div class="bottom-row">
+
+        <!-- SHAP Waterfall card -->
+        <div class="card" onclick="window.location.href='explainability.html'">
+          <div class="card-top">
+            <div>
+              <h3 class="card-title">SHAP waterfall</h3>
+              <p class="card-subtitle">
+                How each feature pushed the prediction from
+                baseline (23.2 kWh) to final (28.4 kWh)
+              </p>
+            </div>
+            <!-- Local / Global toggle -->
+            <div class="toggle-tabs">
+              <button class="toggle-tab active">Local</button>
+              <button class="toggle-tab">Global</button>
+            </div>
+          </div>
+
+          <!-- Preview of the SHAP bars -->
+          <div class="shap-preview">
+            <div class="shap-bar-row">
+              <span class="shap-bar-label">Cloud</span>
+              <div class="shap-bar shap-bar--lg shap-bar--orange"></div>
+              <span class="shap-pct">+38%</span>
+            </div>
+            <div class="shap-bar-row">
+              <span class="shap-bar-label">GHI</span>
+              <div class="shap-bar shap-bar--md shap-bar--orange-light"></div>
+              <span class="shap-pct">+24%</span>
+            </div>
+            <div class="shap-bar-row">
+              <span class="shap-bar-label">Temp</span>
+              <div class="shap-bar shap-bar--sm shap-bar--amber"></div>
+              <span class="shap-pct">+15%</span>
+            </div>
+            <div class="shap-bar-row">
+              <span class="shap-bar-label">Humid</span>
+              <div class="shap-bar shap-bar--xs shap-bar--blue"></div>
+              <span class="shap-pct">-7%</span>
+            </div>
+          </div>
+
+        </div>
+
+
+        <!-- Feature contributions card -->
+        <div class="card" onclick="window.location.href='explainability.html'">
+          <h3 class="card-title">Feature contributions</h3>
+
+          <!-- Cloud cover -->
+          <div class="feature">
+            <div class="feature-header">
+              <span class="feature-name">Cloud cover</span>
+              <span class="feature-pct--pos">+38%</span>
+            </div>
+            <div class="feature-track">
+              <div class="feature-bar feature-bar--orange" style="--w: 90%"></div>
+            </div>
+          </div>
+
+          <!-- GHI -->
+          <div class="feature">
+            <div class="feature-header">
+              <span class="feature-name">GHI (irradiance)</span>
+              <span class="feature-pct--pos">+24%</span>
+            </div>
+            <div class="feature-track">
+              <div class="feature-bar feature-bar--orange" style="--w: 68%"></div>
+            </div>
+          </div>
+
+          <!-- Temperature -->
+          <div class="feature">
+            <div class="feature-header">
+              <span class="feature-name">Temperature</span>
+              <span class="feature-pct--pos">+15%</span>
+            </div>
+            <div class="feature-track">
+              <div class="feature-bar feature-bar--orange" style="--w: 48%"></div>
+            </div>
+          </div>
+
+          <!-- Tilt angle -->
+          <div class="feature">
+            <div class="feature-header">
+              <span class="feature-name">Tilt angle</span>
+              <span class="feature-pct--pos">+9%</span>
+            </div>
+            <div class="feature-track">
+              <div class="feature-bar feature-bar--orange" style="--w: 30%"></div>
+            </div>
+          </div>
+
+          <!-- Humidity -->
+          <div class="feature">
+            <div class="feature-header">
+              <span class="feature-name">Humidity</span>
+              <span class="feature-pct--neg">-7%</span>
+            </div>
+            <div class="feature-track">
+              <div class="feature-bar feature-bar--blue" style="--w: 22%"></div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<script src="explainability2.js"></script>
+
+</body>
+</html>
