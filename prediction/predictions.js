@@ -1,52 +1,93 @@
 /* ================================================
    SOLARPROPHET — predictions.js
-
-   This file does 2 things:
-   1. Handles the chart tab buttons (24h, 7 days etc)
-   2. Animates the stat cards on page load
 ================================================ */
 
 
-/* ------------------------------------------------
-   THING 1: CHART TAB BUTTONS
-   
-   When you click 24h / 7 days / 30 days / 1 year,
-   the clicked tab becomes white (active) and
-   the others go back to normal grey.
------------------------------------------------- */
-function setChartTab(clickedTab) {
-
-  /* Remove active from all chart tabs */
-  document.querySelectorAll('.chart-tab').forEach(function(tab) {
-    tab.classList.remove('active');
+/* ── CHART SEGMENT TABS ──────────────────────── */
+function setSegment(clicked) {
+  const parent = clicked.closest('.sp-segment');
+  parent.querySelectorAll('button').forEach(function(btn) {
+    btn.classList.remove('active');
   });
+  clicked.classList.add('active');
 
-  /* Add active to the one that was clicked */
-  clickedTab.classList.add('active');
+  /* Show what changed */
+  SP.toast('Showing ' + clicked.textContent + ' forecast');
 }
 
 
-/* ------------------------------------------------
-   THING 2: ANIMATE STAT CARDS ON LOAD
-   
-   The four cards at the top fade in and slide up
-   one after another when the page loads.
------------------------------------------------- */
-const cards = document.querySelectorAll('.stat-card');
-
-/* Start all cards invisible and slightly lower */
-cards.forEach(function(card) {
-  card.style.opacity   = '0';
-  card.style.transform = 'translateY(16px)';
-  card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-});
-
-/* Reveal each card one by one with a small delay */
+/* ── STAT CARD ANIMATION ─────────────────────── */
 window.addEventListener('load', function() {
-  cards.forEach(function(card, index) {
+  const cards = document.querySelectorAll('.stat-grid .sp-card');
+  cards.forEach(function(card, i) {
+    card.style.opacity   = '0';
+    card.style.transform = 'translateY(16px)';
+    card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
     setTimeout(function() {
       card.style.opacity   = '1';
       card.style.transform = 'translateY(0)';
-    }, 100 + index * 100);
+    }, 100 + i * 80);
   });
+});
+
+
+/* ── SMS OPT-IN FORM ─────────────────────────── */
+function submitSMS(event) {
+  event.preventDefault();
+
+  const phone    = document.getElementById('phoneInput').value.trim();
+  const location = document.getElementById('smsLocation').value;
+  const freq     = document.querySelector('input[name="freq"]:checked').value;
+
+  /* Validate phone */
+  if (phone.length < 9) {
+    SP.toastError('Please enter a valid Ghana phone number.');
+    document.getElementById('phoneInput').style.borderColor = 'var(--sp-error)';
+    return;
+  }
+
+  /* Reset border */
+  document.getElementById('phoneInput').style.borderColor = '';
+
+  /* Show success */
+  document.getElementById('smsSuccess').classList.add('show');
+
+  /* Show toast */
+  SP.toast('Subscribed! First forecast arrives tomorrow at 6am.');
+
+  /* Save to localStorage */
+  const subs = JSON.parse(localStorage.getItem('sp-sms-subs') || '[]');
+  subs.push({
+    phone:    '+233' + phone,
+    location: location,
+    freq:     freq,
+    date:     new Date().toLocaleDateString()
+  });
+  localStorage.setItem('sp-sms-subs', JSON.stringify(subs));
+}
+
+
+/* ── SHARE VIA SMS ───────────────────────────── */
+function shareSMS() {
+  const message =
+    'SolarProphet forecast for Ejisu, Ashanti:\n' +
+    'Tomorrow: 28.4 kWh\n' +
+    'Peak: 12:30pm · Clear skies\n' +
+    'Confidence: High\n' +
+    'View full forecast: solarprophet.app';
+
+  /* Opens phone SMS app with message pre-filled */
+  window.location.href = 'sms:?body=' + encodeURIComponent(message);
+}
+
+
+/* ── DATA STATUS INDICATOR ───────────────────── */
+document.addEventListener('DOMContentLoaded', function() {
+  /* Show live data status on the chart card */
+  const chartCard = document.querySelector('.chart-card');
+  if (chartCard && !chartCard.id) chartCard.id = 'chart-card';
+
+  setTimeout(function() {
+    SP.setStatus('chart-card', 'live', 'Updated just now · Day-ahead · Ejisu');
+  }, 700);
 });
