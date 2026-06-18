@@ -2,435 +2,318 @@
    SOLARPROPHET — predictions.css
 ================================================ */
 
-/* Same colors as all other pages */
-:root {
-  --cream:       #F7EEE2;
-  --cream-light: #FBF5ED;
-  --white:       #FFFFFF;
-  --dark:        #1C120A;
-  --brown:       #5A3E28;
-  --brown-light: #9C7B5E;
-  --orange:      #C45E20;
-  --red-dark:    #B84A20;
-  --border:      #EFE0CB;
-  --badge-bg:    #F2D8C2;
-
-  --font-serif: 'Playfair Display', Georgia, serif;
-  --font-mono:  'DM Mono', monospace;
-  --font-body:  'DM Sans', sans-serif;
+/* Flat card variant */
+.sp-card--flat {
+  background: var(--sp-bg-sunken);
+  box-shadow: none;
+  border: 1px solid var(--sp-border-soft);
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
-
-body {
-  font-family: var(--font-body);
-  color: var(--dark);
-  background: var(--cream);
-  height: 100vh;
-  overflow: hidden;
-}
-
-a { text-decoration: none; color: inherit; }
-button { cursor: pointer; border: none; font-family: var(--font-body); }
-
-/* Full page layout */
-.page {
-  display: flex;
-  height: 100vh;
-}
-
-
-/* ==============================
-   SIDEBAR — same as map page
-============================== */
-.sidebar {
-  width: 260px;
-  background: var(--white);
-  border-right: 1px solid var(--border);
-  display: flex;
-  flex-direction: column;
-  padding: 1.5rem 1rem;
-  flex-shrink: 0;
-  overflow-y: auto;
-}
-
-.sidebar-logo {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 2rem;
-  padding: 0 0.5rem;
-}
-
-.sidebar-logo-img {
-  width: 22px;
-  height: 22px;
-  object-fit: contain;
-}
-
-.sidebar-logo-text {
-  font-family: var(--font-serif);
-  font-size: 1rem;
-  font-weight: 500;
-  color: var(--dark);
-}
-
-.sidebar-nav {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  flex: 1;
-}
-
-.nav-item {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.6rem 0.75rem;
-  border-radius: 8px;
-  font-size: 0.9rem;
-  color: var(--brown);
-  transition: background 0.15s, color 0.15s;
-}
-
-.nav-item:hover { background: var(--cream); color: var(--dark); }
-
-.nav-item.active {
-  background: var(--badge-bg);
-  color: var(--orange);
-  font-weight: 500;
-}
-
-.nav-item i { width: 18px; text-align: center; font-size: 0.95rem; }
-
-.sidebar-bottom {
-  border-top: 1px solid var(--border);
-  padding-top: 1rem;
-  margin-top: 1rem;
-}
-
-.user-profile {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.75rem;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-.user-profile:hover { background: var(--cream); }
-
-.user-avatar {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: var(--orange);
-  color: white;
-  font-size: 0.8rem;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.user-name { font-size: 0.85rem; font-weight: 500; color: var(--dark); }
-.user-role { font-size: 0.75rem; color: var(--brown-light); }
-
-
-/* ==============================
-   MAIN CONTENT
-============================== */
-.main {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-
-/* Top bar */
-.top-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1.25rem 1.5rem;
-  border-bottom: 1px solid var(--border);
-  background: var(--white);
-  flex-shrink: 0;
-}
-
-/* Breadcrumb: Map · Predictions · Ejisu, Ashanti */
-.breadcrumb {
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  color: var(--brown-light);
-  letter-spacing: 0.04em;
-  margin-bottom: 0.3rem;
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-}
-
-.breadcrumb a {
-  color: var(--orange);
-}
-
-.breadcrumb a:hover {
-  text-decoration: underline;
-}
-
-.page-title {
-  font-family: var(--font-serif);
-  font-size: 1.8rem;
-  font-weight: 400;
-  color: var(--dark);
-}
-
-.top-bar-right {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-/* "Save" button — outlined style */
-.save-button {
-  background: var(--white);
-  color: var(--dark);
-  font-size: 0.875rem;
-  font-weight: 500;
-  padding: 0.5rem 1.25rem;
-  border-radius: 999px;
-  border: 1px solid var(--border);
-  transition: background 0.2s;
-}
-
-.save-button:hover { background: var(--cream); }
-
-/* "Export PDF" button — filled orange */
-.export-button {
-  background: var(--orange);
-  color: white;
-  font-size: 0.875rem;
-  font-weight: 500;
-  padding: 0.5rem 1.25rem;
-  border-radius: 999px;
-  transition: background 0.2s;
-}
-
-.export-button:hover { background: #A8501A; }
-
-
-/* ==============================
-   SCROLLABLE CONTENT
-============================== */
-.content {
-  flex: 1;
-  overflow-y: auto;
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-
-/* ==============================
-   4 STAT CARDS
-============================== */
-.stat-cards {
+/* ── 4 STAT CARDS ─────────────────────────────── */
+.stat-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
+  gap: 14px;
+  margin-bottom: 20px;
 }
 
-.stat-card {
-  background: var(--white);
-  border-radius: 14px;
-  padding: 1.25rem;
-  border: 1px solid var(--border);
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
+/* Annual savings card — warm gradient */
+.savings-card {
+  background: linear-gradient(
+    135deg,
+    rgba(255,174,0,0.12),
+    rgba(196,56,10,0.06)
+  ) !important;
+  border-color: rgba(196,56,10,0.18) !important;
 }
 
-/* The annual savings card has a cream background */
-.stat-card--highlight {
-  background: var(--cream-light);
+.stat-sub {
+  font-size: 11px;
+  color: var(--sp-ink-soft);
+  margin-top: 6px;
 }
 
-/* Small label at the top: "DAILY", "WEEKLY" etc */
-.stat-card-label {
-  font-family: var(--font-mono);
-  font-size: 0.62rem;
-  letter-spacing: 0.1em;
-  color: var(--brown-light);
-}
-
-/* Number and unit on same row */
-.stat-card-value {
-  display: flex;
-  align-items: baseline;
-  gap: 0.15rem;
-}
-
-/* The big number */
-.stat-number {
-  font-family: var(--font-serif);
-  font-size: 2rem;
-  font-weight: 400;
-  color: var(--dark);
-  line-height: 1;
-}
-
-/* "kWh" in orange italic */
-.stat-unit {
-  font-family: var(--font-serif);
-  font-size: 2rem;
-  font-style: italic;
-  color: var(--orange);
-  line-height: 1;
-}
-
-/* "GHS 5,470" is slightly bigger */
-.stat-number--large {
-  font-family: var(--font-serif);
-  font-size: 1.8rem;
-  font-weight: 400;
-  color: var(--orange);
-  font-style: italic;
-}
-
-/* Small sub-text: "±1.1 kWh", "May 2026" */
-.stat-card-sub {
-  font-size: 0.78rem;
-  color: var(--brown-light);
-}
-
-
-/* ==============================
-   FORECAST CHART CARD
-============================== */
+/* ── FORECAST CHART CARD ──────────────────────── */
 .chart-card {
-  background: var(--white);
-  border-radius: 14px;
-  padding: 1.5rem;
-  border: 1px solid var(--border);
+  padding: 24px;
+  margin-bottom: 20px;
 }
 
-/* Chart header: title + tabs */
 .chart-header {
   display: flex;
-  align-items: flex-start;
   justify-content: space-between;
-  margin-bottom: 1.5rem;
+  align-items: flex-start;
+  margin-bottom: 18px;
 }
 
 .chart-title {
-  font-family: var(--font-serif);
-  font-size: 1.4rem;
-  font-weight: 400;
-  color: var(--dark);
-}
-
-.chart-subtitle {
-  font-size: 0.82rem;
-  color: var(--brown-light);
-  margin-top: 0.2rem;
-}
-
-/* 24h / 7 days / 30 days / 1 year tabs */
-.chart-tabs {
-  display: flex;
-  background: var(--cream);
-  border-radius: 999px;
-  padding: 3px;
-  gap: 2px;
-}
-
-.chart-tab {
-  padding: 0.4rem 0.85rem;
-  border-radius: 999px;
-  font-size: 0.8rem;
-  color: var(--brown);
-  background: transparent;
-  transition: background 0.2s, color 0.2s;
-  white-space: nowrap;
-}
-
-.chart-tab.active {
-  background: var(--white);
-  color: var(--dark);
+  font-family: var(--sp-font-display);
+  font-size: 22px;
   font-weight: 500;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  color: var(--sp-ink);
 }
 
-/* The SVG chart area */
+.chart-sub {
+  font-size: 12px;
+  color: var(--sp-ink-soft);
+  margin-top: 4px;
+}
+
+/* SVG chart area */
 .chart-area {
-  width: 100%;
+  height: 240px;
+  overflow: visible;
 }
 
-.chart-area svg {
-  width: 100%;
-  height: 260px;
-  display: block;
-}
+.chart-area svg { width: 100%; height: 100%; }
 
-/* Day labels under the chart */
-.chart-days {
-  display: flex;
-  justify-content: space-between;
-  padding: 0.5rem 0.5rem 0;
-}
-
-.chart-days span {
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  color: var(--brown-light);
-}
-
-/* Legend at the bottom */
+/* Chart legend */
 .chart-legend {
   display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  margin-top: 1rem;
-  padding-top: 1rem;
-  border-top: 1px solid var(--border);
+  gap: 20px;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--sp-border-soft);
+  font-size: 11px;
+  color: var(--sp-ink-soft);
 }
 
 .legend-item {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  font-size: 0.8rem;
-  color: var(--brown);
+  gap: 6px;
 }
 
-/* Solid orange line for "Predicted" */
-.legend-line--solid {
-  width: 28px;
+.legend-line {
+  width: 14px;
   height: 2.5px;
-  background: var(--red-dark);
   border-radius: 2px;
+  display: inline-block;
 }
 
-/* Dashed line for "Past actual" */
-.legend-line--dashed {
-  width: 28px;
+.legend-dashed {
+  width: 14px;
   height: 2px;
-  background: repeating-linear-gradient(
-    90deg,
-    #8B6B4A 0px,
-    #8B6B4A 6px,
-    transparent 6px,
-    transparent 10px
-  );
+  border-top: 2px dashed var(--sp-ink-soft);
+  display: inline-block;
 }
 
-/* Cream box for "95% confidence" */
-.legend-box {
-  width: 18px;
-  height: 14px;
-  background: #F0D4A0;
-  border-radius: 3px;
-  opacity: 0.8;
+.legend-band {
+  width: 14px;
+  height: 8px;
+  background: rgba(255,174,0,0.18);
+  border-radius: 2px;
+  display: inline-block;
 }
+
+/* ── BOTTOM GRID ──────────────────────────────── */
+/*
+.bottom-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+/* ── SMS CARD ─────────────────────────────────── 
+.sms-card { display: flex; flex-direction: column; gap: 14px; }
+
+.sms-card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.sms-icon-wrap {
+  font-size: 22px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* Phone message preview
+.sms-preview {
+  background: var(--sp-bg-sunken);
+  border-radius: var(--sp-r-md);
+  padding: 12px 14px;
+  border: 1px solid var(--sp-border-soft);
+}
+
+.sms-preview-sender {
+  font-family: var(--sp-font-mono);
+  font-size: 10px;
+  color: var(--sp-ink-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 6px;
+}
+
+.sms-bubble {
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--sp-ink-soft);
+  font-family: var(--sp-font-mono);
+}
+
+/* SMS opt-in form 
+.sms-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--sp-bg-elevated);
+  border: 1px solid var(--sp-border);
+  border-radius: var(--sp-r-md);
+  padding: 0 12px;
+  overflow: hidden;
+}
+
+.phone-flag {
+  font-size: 13px;
+  color: var(--sp-ink-soft);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.form-row .sp-input {
+  border: none;
+  padding: 12px 0;
+  border-radius: 0;
+}
+
+.form-row .sp-input:focus { box-shadow: none; }
+
+/* Frequency radio options 
+.freq-options {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.freq-opt {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--sp-ink-soft);
+  cursor: pointer;
+  padding: 6px 8px;
+  border-radius: var(--sp-r-sm);
+  transition: background 0.15s;
+}
+
+.freq-opt:hover { background: var(--sp-bg-sunken); }
+
+.freq-opt input[type="radio"] {
+  accent-color: var(--sp-sun-700);
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.freq-opt strong { color: var(--sp-ink); }
+
+/* Success message 
+.sms-success {
+  display: none;
+  background: var(--sp-success-soft);
+  color: var(--sp-success);
+  padding: 10px 14px;
+  border-radius: var(--sp-r-md);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.sms-success.show { display: block; }
+
+/* ── DARK MODE OVERRIDES ──────────────────────── 
+[data-theme="dark"] .chart-area svg text {
+  fill: rgba(245,237,224,0.5);
+}
+
+[data-theme="dark"] .chart-area svg line {
+  stroke: rgba(245,237,224,0.06);
+}
+   */
+
+
+   /* ── PLAIN LANGUAGE SUMMARY + SHAP ───────────── */
+
+/* Two column grid: summary left, SHAP right */
+.summary-shap-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.summary-title {
+  font-family: var(--sp-font-display);
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--sp-ink);
+  margin-bottom: 14px;
+}
+
+.summary-body {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--sp-ink);
+  margin-bottom: 14px;
+}
+
+.summary-body--soft { color: var(--sp-ink-soft); }
+
+/* SHAP rows container */
+.shap-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Override bar fill to use CSS variable width */
+.sp-shap-row__bar {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Animated fill bar */
+.shap-fill {
+  position: absolute;
+  top: 0; left: 0; bottom: 0;
+  width: var(--w, 0%);
+  background: linear-gradient(90deg, var(--sp-sun-700), var(--sp-sun-400));
+  border-radius: 3px;
+  transition: width 0.9s ease;
+}
+
+/* Negative bar (blue for humidity) */
+.sp-shap-row--neg .shap-fill {
+  background: linear-gradient(90deg, var(--sp-info), #6b9bcb);
+}
+
+/* Link to SHAP dashboard */
+.shap-link {
+  display: block;
+  margin-top: 14px;
+  font-size: 12px;
+  color: var(--sp-sun-700);
+  font-weight: 500;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.shap-link:hover { opacity: 0.75; }
+
+/* ── DARK MODE OVERRIDES ──────────────────────── */
+[data-theme="dark"] .chart-area svg text {
+  fill: rgba(245,237,224,0.5);
+}
+
+[data-theme="dark"] .chart-area svg line {
+  stroke: rgba(245,237,224,0.06);
+}
+
