@@ -155,10 +155,9 @@ function updateSuggestion(panelName) {
 }
 
 
-/* ------------------------------------------------
-   ANIMATE BARS ON LOAD
+/* ANIMATE BARS ON LOAD
    The comparison bars grow from 0 to full width
------------------------------------------------- */
+ */
 const bars = document.querySelectorAll('.bar');
 
 bars.forEach(function(bar) {
@@ -173,3 +172,4 @@ window.addEventListener('load', function() {
     }, 200 + index * 150);
   });
 });
+
