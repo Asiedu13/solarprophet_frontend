@@ -14,14 +14,14 @@
 
   <!-- Our CSS -->
   <link rel="stylesheet" href="systemconfig.css" />
+  <link rel="stylesheet" href="state.css">
+  <link rel="stylesheet" href="shared.css">
 </head>
 <body>
 
 <div class="page">
 
-  <!-- ==============================
-       LEFT SIDEBAR
-  ============================== -->
+  <!--LEFT SIDEBAR-->
   <aside class="sidebar">
 
     <div class="sidebar-logo">
@@ -51,6 +51,7 @@
         <i class="fa-solid fa-globe"></i>
         <span>Explainability</span>
       </a>
+      <!--
       <a href="#" class="nav-item">
         <i class="fa-solid fa-arrow-down-to-bracket"></i>
         <span>Reports</span>
@@ -59,8 +60,10 @@
         <i class="fa-regular fa-bookmark"></i>
         <span>Saved</span>
       </a>
+      -->
     </nav>
 
+    <!--
     <div class="sidebar-bottom">
       <div class="user-profile">
         <div class="user-avatar">PA</div>
@@ -70,13 +73,12 @@
         </div>
       </div>
     </div>
+    -->
 
   </aside>
 
 
-  <!-- ==============================
-       MAIN CONTENT
-  ============================== -->
+  <!-- MAIN CONTENT-->
   <main class="main">
 
     <!-- Top bar -->
@@ -85,6 +87,12 @@
         <h1 class="page-title">System Configuration</h1>
         <p class="page-subtitle">DEFINE YOUR INSTALLATION · FORECAST UPDATES IN REAL-TIME</p>
       </div>
+
+    <div class="sp-theme-toggle">
+      <button data-theme-btn="light" class="active">Light</button>
+      <button data-theme-btn="dark">Dark</button>
+    </div>
+
       <div class="top-bar-right">
         <button class="outline-button">Reset to defaults</button>
         <button class="filled-button">Save configuration</button>
@@ -330,12 +338,41 @@
 
         </div>
       </div>
+  
+      <div class="panel-inverter-row">
+    
+    <div class="field">
+        <label>Number of panels</label>
 
+        <input
+            type="number"
+            value="20"
+            min="1"
+        >
+
+        <span class="helper">
+            ~360W each, derived from capacity
+        </span>
+    </div>
+
+    <div class="field">
+        <label>Inverter type</label>
+
+        <select>
+            <option>Microinverter (97% eff.)</option>
+            <option>String Inverter (96% eff.)</option>
+            <option>Hybrid Inverter (98% eff.)</option>
+        </select>
+    </div>
+
+</div>
     </div>
   </main>
 </div>
 
+<script src="shared.js"></script>
 <script src="systemconfig.js"></script>
+<script src="state.js"></script>
 
 </body>
 </html>
