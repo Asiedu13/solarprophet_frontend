@@ -1,37 +1,25 @@
 /* ================================================
    SOLARPROPHET — systemconfig.css
+   Updated to use shared.css design tokens
+   so dark mode works correctly
 ================================================ */
 
-:root {
-  --cream:       #F7EEE2;
-  --cream-light: #FBF5ED;
-  --white:       #FFFFFF;
-  --dark:        #1C120A;
-  --brown:       #5A3E28;
-  --brown-light: #9C7B5E;
-  --orange:      #C45E20;
-  --border:      #EFE0CB;
-  --badge-bg:    #F2D8C2;
-  --green-bg:    #EAF5EE;
-  --green-text:  #2E7D52;
-
-  --font-serif: 'Playfair Display', Georgia, serif;
-  --font-mono:  'DM Mono', monospace;
-  --font-body:  'DM Sans', sans-serif;
-}
+/* Remove the old :root block entirely —
+   shared.css already defines all tokens */
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  font-family: var(--font-body);
-  color: var(--dark);
-  background: var(--cream);
+  font-family: var(--sp-font-body);
+  color: var(--sp-ink);
+  background: var(--sp-bg);
   height: 100vh;
   overflow: hidden;
+  transition: background 0.3s, color 0.3s;
 }
 
 a { text-decoration: none; color: inherit; }
-button { cursor: pointer; border: none; font-family: var(--font-body); }
+button { cursor: pointer; border: none; font-family: var(--sp-font-body); }
 
 .page { display: flex; height: 100vh; }
 
@@ -41,13 +29,14 @@ button { cursor: pointer; border: none; font-family: var(--font-body); }
 ============================== */
 .sidebar {
   width: 260px;
-  background: var(--white);
-  border-right: 1px solid var(--border);
+  background: var(--sp-bg-elevated);
+  border-right: 1px solid var(--sp-border-soft);
   display: flex;
   flex-direction: column;
   padding: 1.5rem 1rem;
   flex-shrink: 0;
   overflow-y: auto;
+  transition: background 0.3s;
 }
 
 .sidebar-logo {
@@ -61,10 +50,10 @@ button { cursor: pointer; border: none; font-family: var(--font-body); }
 .sidebar-logo-img { width: 22px; height: 22px; object-fit: contain; }
 
 .sidebar-logo-text {
-  font-family: var(--font-serif);
+  font-family: var(--sp-font-display);
   font-size: 1rem;
   font-weight: 500;
-  color: var(--dark);
+  color: var(--sp-ink);
 }
 
 .sidebar-nav {
@@ -81,22 +70,26 @@ button { cursor: pointer; border: none; font-family: var(--font-body); }
   padding: 0.6rem 0.75rem;
   border-radius: 8px;
   font-size: 0.9rem;
-  color: var(--brown);
+  color: var(--sp-ink-soft);
   transition: background 0.15s, color 0.15s;
+  text-decoration: none;
 }
 
-.nav-item:hover { background: var(--cream); color: var(--dark); }
+.nav-item:hover {
+  background: var(--sp-bg-sunken);
+  color: var(--sp-ink);
+}
 
 .nav-item.active {
-  background: var(--badge-bg);
-  color: var(--orange);
+  background: rgba(196,56,10,0.08);
+  color: var(--sp-sun-700);
   font-weight: 500;
 }
 
 .nav-item i { width: 18px; text-align: center; font-size: 0.95rem; }
 
 .sidebar-bottom {
-  border-top: 1px solid var(--border);
+  border-top: 1px solid var(--sp-border-soft);
   padding-top: 1rem;
   margin-top: 1rem;
 }
@@ -108,15 +101,16 @@ button { cursor: pointer; border: none; font-family: var(--font-body); }
   padding: 0.75rem;
   border-radius: 8px;
   cursor: pointer;
+  transition: background 0.15s;
 }
 
-.user-profile:hover { background: var(--cream); }
+.user-profile:hover { background: var(--sp-bg-sunken); }
 
 .user-avatar {
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: var(--orange);
+  background: linear-gradient(135deg, var(--sp-sun-400), var(--sp-sun-700));
   color: white;
   font-size: 0.8rem;
   font-weight: 500;
@@ -126,8 +120,8 @@ button { cursor: pointer; border: none; font-family: var(--font-body); }
   flex-shrink: 0;
 }
 
-.user-name { font-size: 0.85rem; font-weight: 500; color: var(--dark); }
-.user-role { font-size: 0.75rem; color: var(--brown-light); }
+.user-name { font-size: 0.85rem; font-weight: 500; color: var(--sp-ink); }
+.user-role { font-size: 0.75rem; color: var(--sp-ink-muted); }
 
 
 /* ==============================
@@ -145,23 +139,24 @@ button { cursor: pointer; border: none; font-family: var(--font-body); }
   align-items: center;
   justify-content: space-between;
   padding: 1.25rem 1.5rem;
-  border-bottom: 1px solid var(--border);
-  background: var(--white);
+  border-bottom: 1px solid var(--sp-border-soft);
+  background: var(--sp-bg);
   flex-shrink: 0;
+  transition: background 0.3s;
 }
 
 .page-title {
-  font-family: var(--font-serif);
+  font-family: var(--sp-font-display);
   font-size: 1.8rem;
   font-weight: 400;
-  color: var(--dark);
+  color: var(--sp-ink);
 }
 
 .page-subtitle {
-  font-family: var(--font-mono);
+  font-family: var(--sp-font-mono);
   font-size: 0.65rem;
   letter-spacing: 0.08em;
-  color: var(--brown-light);
+  color: var(--sp-ink-muted);
   margin-top: 0.25rem;
 }
 
@@ -172,28 +167,32 @@ button { cursor: pointer; border: none; font-family: var(--font-body); }
 }
 
 .outline-button {
-  background: var(--white);
-  color: var(--dark);
+  background: var(--sp-bg-elevated);
+  color: var(--sp-ink);
   font-size: 0.875rem;
   padding: 0.5rem 1.25rem;
   border-radius: 999px;
-  border: 1px solid var(--border);
+  border: 1px solid var(--sp-border);
   transition: background 0.2s;
+  cursor: pointer;
+  font-family: var(--sp-font-body);
 }
 
-.outline-button:hover { background: var(--cream); }
+.outline-button:hover { background: var(--sp-bg-sunken); }
 
 .filled-button {
-  background: var(--orange);
+  background: var(--sp-sun-700);
   color: white;
   font-size: 0.875rem;
   font-weight: 500;
   padding: 0.5rem 1.25rem;
   border-radius: 999px;
   transition: background 0.2s;
+  cursor: pointer;
+  font-family: var(--sp-font-body);
 }
 
-.filled-button:hover { background: #A8501A; }
+.filled-button:hover { background: var(--sp-sun-800); }
 
 
 /* ==============================
@@ -205,7 +204,6 @@ button { cursor: pointer; border: none; font-family: var(--font-body); }
   padding: 1.5rem;
 }
 
-/* Two column layout */
 .two-col {
   display: grid;
   grid-template-columns: 1.2fr 1fr;
@@ -213,20 +211,20 @@ button { cursor: pointer; border: none; font-family: var(--font-body); }
   align-items: start;
 }
 
-/* Shared card */
 .card {
-  background: var(--white);
+  background: var(--sp-bg-elevated);
   border-radius: 16px;
   padding: 1.5rem;
-  border: 1px solid var(--border);
+  border: 1px solid var(--sp-border-soft);
   margin-bottom: 1rem;
+  transition: background 0.3s;
 }
 
 .card-title {
-  font-family: var(--font-serif);
+  font-family: var(--sp-font-display);
   font-size: 1.2rem;
   font-weight: 400;
-  color: var(--dark);
+  color: var(--sp-ink);
   margin-bottom: 1rem;
 }
 
@@ -234,33 +232,29 @@ button { cursor: pointer; border: none; font-family: var(--font-body); }
 /* ==============================
    PANEL TYPE
 ============================== */
-.panel-options {
-  display: flex;
-  gap: 0.75rem;
-}
+.panel-options { display: flex; gap: 0.75rem; }
 
 .panel-option {
   flex: 1;
-  border: 1.5px solid var(--border);
+  border: 1.5px solid var(--sp-border);
   border-radius: 12px;
   padding: 0.85rem 1rem;
   cursor: pointer;
   position: relative;
   transition: border-color 0.2s, background 0.2s;
+  background: var(--sp-bg-elevated);
 }
 
 .panel-option:hover {
-  border-color: var(--orange);
-  background: var(--cream-light);
+  border-color: var(--sp-sun-700);
+  background: var(--sp-bg-sunken);
 }
 
-/* Selected panel — orange border */
 .panel-option.selected {
-  border-color: var(--orange);
-  background: var(--cream-light);
+  border-color: var(--sp-sun-700);
+  background: var(--sp-bg-sunken);
 }
 
-/* Orange checkmark on selected panel */
 .panel-check {
   position: absolute;
   top: -8px;
@@ -268,7 +262,7 @@ button { cursor: pointer; border: none; font-family: var(--font-body); }
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: var(--orange);
+  background: var(--sp-sun-700);
   color: white;
   display: flex;
   align-items: center;
@@ -276,21 +270,12 @@ button { cursor: pointer; border: none; font-family: var(--font-body); }
   font-size: 0.6rem;
 }
 
-.panel-name {
-  font-size: 0.88rem;
-  font-weight: 500;
-  color: var(--dark);
-}
-
-.panel-eff {
-  font-size: 0.75rem;
-  color: var(--brown-light);
-  margin-top: 0.2rem;
-}
+.panel-name { font-size: 0.88rem; font-weight: 500; color: var(--sp-ink); }
+.panel-eff  { font-size: 0.75rem; color: var(--sp-ink-muted); margin-top: 0.2rem; }
 
 
 /* ==============================
-   SYSTEM CAPACITY SLIDER
+   CAPACITY SLIDER
 ============================== */
 .capacity-header {
   display: flex;
@@ -299,49 +284,38 @@ button { cursor: pointer; border: none; font-family: var(--font-body); }
   margin-bottom: 1rem;
 }
 
-/* "5.0 kW" value — orange italic */
 .capacity-value {
-  font-family: var(--font-serif);
+  font-family: var(--sp-font-display);
   font-size: 1.5rem;
-  color: var(--orange);
+  color: var(--sp-sun-700);
   font-style: italic;
 }
 
-.capacity-value em {
-  font-style: italic;
-}
-
-/*
-  The range slider — styled to match the orange
-  design of the page. The thumb is the draggable
-  circle and the track is the line behind it.
-*/
 .capacity-slider {
   width: 100%;
   height: 4px;
   border-radius: 2px;
-  background: linear-gradient(
-    to right,
-    var(--orange) 0%,
-    var(--orange) 27%,   /* 27% = position of 5kW on 1-15 scale */
-    var(--border) 27%,
-    var(--border) 100%
-  );
   outline: none;
   border: none;
   cursor: pointer;
   appearance: none;
   -webkit-appearance: none;
+  background: linear-gradient(
+    to right,
+    var(--sp-sun-700) 0%,
+    var(--sp-sun-700) 27%,
+    var(--sp-border) 27%,
+    var(--sp-border) 100%
+  );
 }
 
-/* The draggable circle on the slider */
 .capacity-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: var(--white);
-  border: 2px solid var(--orange);
+  background: var(--sp-bg-elevated);
+  border: 2px solid var(--sp-sun-700);
   cursor: pointer;
   box-shadow: 0 1px 4px rgba(0,0,0,0.15);
 }
@@ -350,12 +324,11 @@ button { cursor: pointer; border: none; font-family: var(--font-body); }
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: var(--white);
-  border: 2px solid var(--orange);
+  background: var(--sp-bg-elevated);
+  border: 2px solid var(--sp-sun-700);
   cursor: pointer;
 }
 
-/* 1kW / 5kW / 15kW labels */
 .slider-labels {
   display: flex;
   justify-content: space-between;
@@ -363,34 +336,20 @@ button { cursor: pointer; border: none; font-family: var(--font-body); }
 }
 
 .slider-labels span {
-  font-family: var(--font-mono);
+  font-family: var(--sp-font-mono);
   font-size: 0.68rem;
-  color: var(--brown-light);
+  color: var(--sp-ink-muted);
 }
 
 
 /* ==============================
-   TILT + ORIENTATION SIDE BY SIDE
+   TILT + ORIENTATION
 ============================== */
-.two-small {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-}
-
+.two-small { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 .two-small .card { margin-bottom: 0; }
 
-/* Tilt diagram + controls side by side */
-.tilt-row {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.tilt-diagram svg {
-  width: 80px;
-  height: 60px;
-}
+.tilt-row { display: flex; align-items: center; gap: 1rem; }
+.tilt-diagram svg { width: 80px; height: 60px; }
 
 .tilt-controls {
   display: flex;
@@ -399,67 +358,42 @@ button { cursor: pointer; border: none; font-family: var(--font-body); }
   gap: 0.5rem;
 }
 
-/* Number input box for tilt angle */
 .tilt-input {
   width: 52px;
   padding: 0.4rem;
-  border: 1.5px solid var(--border);
+  border: 1.5px solid var(--sp-border);
   border-radius: 8px;
-  font-family: var(--font-mono);
+  font-family: var(--sp-font-mono);
   font-size: 0.9rem;
-  color: var(--dark);
+  color: var(--sp-ink);
   text-align: center;
   outline: none;
-  background: var(--cream-light);
+  background: var(--sp-bg-sunken);
+  transition: background 0.3s, color 0.3s;
 }
 
-.tilt-input:focus { border-color: var(--orange); }
+.tilt-input:focus { border-color: var(--sp-sun-700); }
+.tilt-note { font-size: 0.72rem; color: var(--sp-ink-muted); text-align: center; line-height: 1.4; }
 
-.tilt-note {
-  font-size: 0.72rem;
-  color: var(--brown-light);
-  text-align: center;
-  line-height: 1.4;
-}
+.orientation-row { display: flex; align-items: center; gap: 0.75rem; }
+.compass svg { width: 80px; height: 80px; }
+.orientation-controls { display: flex; flex-direction: column; gap: 0.5rem; }
 
-/* Compass + dropdown side by side */
-.orientation-row {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.compass svg {
-  width: 80px;
-  height: 80px;
-}
-
-.orientation-controls {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-/* Direction dropdown */
 .orientation-select {
   padding: 0.4rem 0.6rem;
-  border: 1.5px solid var(--border);
+  border: 1.5px solid var(--sp-border);
   border-radius: 8px;
-  font-family: var(--font-body);
+  font-family: var(--sp-font-body);
   font-size: 0.85rem;
-  color: var(--dark);
-  background: var(--cream-light);
+  color: var(--sp-ink);
+  background: var(--sp-bg-sunken);
   outline: none;
   cursor: pointer;
+  transition: background 0.3s, color 0.3s;
 }
 
-.orientation-select:focus { border-color: var(--orange); }
-
-.orientation-note {
-  font-size: 0.72rem;
-  color: var(--brown-light);
-  line-height: 1.4;
-}
+.orientation-select:focus { border-color: var(--sp-sun-700); }
+.orientation-note { font-size: 0.72rem; color: var(--sp-ink-muted); line-height: 1.4; }
 
 
 /* ==============================
@@ -473,23 +407,22 @@ button { cursor: pointer; border: none; font-family: var(--font-body); }
   top: 0;
 }
 
-/* "LIVE PREVIEW · UPDATES AS YOU TYPE" label */
 .live-label {
-  font-family: var(--font-mono);
+  font-family: var(--sp-font-mono);
   font-size: 0.62rem;
   letter-spacing: 0.1em;
-  color: var(--brown-light);
+  color: var(--sp-ink-muted);
 }
 
-/* The white preview card */
 .preview-card {
-  background: var(--white);
+  background: var(--sp-bg-elevated);
   border-radius: 16px;
   padding: 1.5rem;
-  border: 1px solid var(--border);
+  border: 1px solid var(--sp-border-soft);
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+  transition: background 0.3s;
 }
 
 .preview-header {
@@ -498,13 +431,8 @@ button { cursor: pointer; border: none; font-family: var(--font-body); }
   justify-content: space-between;
 }
 
-.preview-location {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-}
+.preview-location { display: flex; align-items: center; gap: 0.4rem; }
 
-/* Pink dot beside location name */
 .pink-dot {
   width: 8px;
   height: 8px;
@@ -514,65 +442,55 @@ button { cursor: pointer; border: none; font-family: var(--font-body); }
 }
 
 .preview-location-text {
-  font-family: var(--font-mono);
+  font-family: var(--sp-font-mono);
   font-size: 0.68rem;
   letter-spacing: 0.08em;
-  color: var(--brown-light);
+  color: var(--sp-ink-muted);
 }
 
-/* "DAY-AHEAD" badge */
 .day-ahead-badge {
-  font-family: var(--font-mono);
+  font-family: var(--sp-font-mono);
   font-size: 0.65rem;
   font-weight: 500;
   letter-spacing: 0.06em;
-  color: var(--orange);
-  background: var(--badge-bg);
+  color: var(--sp-sun-700);
+  background: rgba(196,56,10,0.08);
   border-radius: 6px;
   padding: 0.3rem 0.6rem;
 }
 
-/* Big 28.4 kWh number */
-.preview-output {
-  display: flex;
-  align-items: baseline;
-}
+.preview-output { display: flex; align-items: baseline; }
 
 .preview-number {
-  font-family: var(--font-serif);
+  font-family: var(--sp-font-display);
   font-size: 3rem;
   font-weight: 400;
-  color: var(--dark);
+  color: var(--sp-ink);
   line-height: 1;
 }
 
 .preview-unit {
-  font-family: var(--font-serif);
+  font-family: var(--sp-font-display);
   font-size: 3rem;
   font-style: italic;
-  color: var(--orange);
+  color: var(--sp-sun-700);
   line-height: 1;
 }
 
-.preview-sub {
-  font-size: 0.78rem;
-  color: var(--brown-light);
-}
+.preview-sub { font-size: 0.78rem; color: var(--sp-ink-muted); }
 
-/* Green "+3.2 kWh vs. default config" row */
 .vs-default {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  background: var(--green-bg);
-  color: var(--green-text);
+  background: var(--sp-success-soft);
+  color: var(--sp-success);
   border-radius: 8px;
   padding: 0.5rem 0.75rem;
   font-size: 0.82rem;
   font-weight: 500;
 }
 
-/* Comparison bars section */
 .comparison { display: flex; flex-direction: column; gap: 0.3rem; }
 
 .comparison-row {
@@ -581,75 +499,103 @@ button { cursor: pointer; border: none; font-family: var(--font-body); }
   justify-content: space-between;
 }
 
-.comparison-label {
-  font-size: 0.78rem;
-  color: var(--brown);
-}
+.comparison-label { font-size: 0.78rem; color: var(--sp-ink-soft); }
 
 .comparison-value {
-  font-family: var(--font-mono);
+  font-family: var(--sp-font-mono);
   font-size: 0.78rem;
-  color: var(--dark);
+  color: var(--sp-ink);
   font-weight: 500;
 }
 
-/* Bar track */
 .bar-track {
   height: 6px;
   border-radius: 3px;
-  background: var(--border);
+  background: var(--sp-border);
   overflow: hidden;
   margin-top: 0.2rem;
 }
 
-/* Bars */
-.bar {
-  height: 100%;
-  width: var(--w, 50%);
-  border-radius: 3px;
-  transition: width 0.6s ease;
-}
+.bar { height: 100%; width: var(--w, 50%); border-radius: 3px; transition: width 0.6s ease; }
+.bar--orange { background: linear-gradient(90deg, var(--sp-sun-700) 0%, var(--sp-sun-400) 100%); }
+.bar--light  { background: var(--sp-ink-faint); }
+.bar--grey   { background: var(--sp-bg-muted); }
 
-/* Your config — orange gradient */
-.bar--orange {
-  background: linear-gradient(90deg, #C45E20 0%, #F0A830 100%);
-}
-
-/* Default — lighter */
-.bar--light {
-  background: #D4B896;
-}
-
-/* Best possible — grey */
-.bar--grey {
-  background: #C8B8A8;
-}
-
-/* Suggestion card */
 .suggestion-card {
-  background: var(--white);
+  background: var(--sp-bg-elevated);
   border-radius: 16px;
   padding: 1.25rem;
-  border: 1px solid var(--border);
+  border: 1px solid var(--sp-border-soft);
   display: flex;
   align-items: flex-start;
   gap: 0.75rem;
+  transition: background 0.3s;
 }
 
-.suggestion-icon {
-  font-size: 1.2rem;
-  flex-shrink: 0;
+.suggestion-icon { font-size: 1.2rem; flex-shrink: 0; }
+.suggestion-title { font-size: 0.9rem; font-weight: 600; color: var(--sp-ink); margin-bottom: 0.3rem; }
+.suggestion-text { font-size: 0.8rem; color: var(--sp-ink-soft); line-height: 1.5; }
+
+/* ==========================================
+   PANELS + INVERTER CARD
+========================================== */
+
+.panel-inverter-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:24px;
+    width: 400px;
+    margin-top: 40px;
+    border-radius: 30px;
+    background-color: white;
+    padding: 20px;
 }
 
-.suggestion-title {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--dark);
-  margin-bottom: 0.3rem;
+.field{
+    display:flex;
+    flex-direction:column;
 }
 
-.suggestion-text {
-  font-size: 0.8rem;
-  color: var(--brown);
-  line-height: 1.5;
+.field label{
+    font-size:14px;
+    font-weight:600;
+    color:var(--sp-ink);
+    margin-bottom:10px;
+}
+
+.field input,
+.field select{
+    width:100%;
+    height:52px;
+    border-radius:16px;
+    padding:0 18px;
+    font-size:15px;
+    font-weight:500;
+
+    background:var(--sp-bg-elevated);
+    color:var(--sp-ink);
+    border:1px solid var(--sp-border-soft);
+    outline:none;
+}
+
+.field select{
+    border:2px solid var(--sp-sun-400);
+}
+
+.panel-inverter-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:24px;
+    margin-top:40px;
+    border-radius:24px;
+    padding:20px;
+
+    background:var(--sp-bg-elevated);
+    border:1px solid var(--sp-border-soft);
+}
+
+.helper{
+    margin-top:8px;
+    font-size:12px;
+    color:var(--sp-ink-muted);
 }
